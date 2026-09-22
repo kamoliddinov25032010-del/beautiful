@@ -3,34 +3,24 @@
 <head>
 
 <meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<meta name="theme-color" content="#fff8fc">
 
 <title>Mahbuba — Personal Portfolio</title>
 
-<meta
-    name="description"
-    content="Mahbuba — Arab tili o‘qituvchisi, B2 sertifikat sohibi, tillar, sayohat va tarixga qiziqadigan shaxsiy portfolio."
->
+<meta name="description" content="Mahbuba — Arab tili o‘qituvchisi, B2 sertifikat sohibi, tillar, sayohat va tarixga qiziqadigan shaxsiy portfolio.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap"
-    rel="stylesheet"
->
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 
 <style>
 
 /* =========================================================
    RESET
 ========================================================= */
-
-* {
+*, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -39,5112 +29,2997 @@
 html {
     scroll-behavior: smooth;
     background: #fff8fc;
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 110px;
 }
 
 body {
     width: 100%;
+    min-height: 100vh;
     overflow-x: hidden;
-
-    background:
-        linear-gradient(
-            135deg,
-            #fffaff 0%,
-            #fff6fb 35%,
-            #ffffff 70%,
-            #fff1f8 100%
-        );
-
     color: #242027;
-
-    font-family: "DM Sans", sans-serif;
+    font-family: "DM Sans", system-ui, -apple-system, sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background:
+        radial-gradient(circle at 12% 8%, rgba(255,214,232,.45), transparent 28%),
+        radial-gradient(circle at 90% 20%, rgba(230,212,245,.40), transparent 30%),
+        radial-gradient(circle at 50% 95%, rgba(255,222,238,.35), transparent 30%),
+        linear-gradient(135deg, #fffaff 0%, #fff8fc 45%, #ffffff 100%);
 }
 
-body::-webkit-scrollbar {
-    width: 6px;
-}
-
-body::-webkit-scrollbar-track {
-    background: #fff5fa;
-}
-
+body::-webkit-scrollbar { width: 6px; }
+body::-webkit-scrollbar-track { background: #fff5fa; }
 body::-webkit-scrollbar-thumb {
-    background: #e8a8c9;
+    background: linear-gradient(#e8a8c9, #c9a5dd);
     border-radius: 50px;
 }
 
-::selection {
-    background: #f4bdd7;
-    color: #251d23;
-}
+::selection { background: #f4bdd7; color: #251d23; }
 
-button,
-a {
-    font: inherit;
-}
-
-button {
-    border: 0;
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
+button, a { font: inherit; }
+button { border: 0; background: none; cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+img, svg { display: block; max-width: 100%; }
 
 /* =========================================================
    VARIABLES
 ========================================================= */
-
 :root {
-
     --pink: #ef9fc4;
     --pink-light: #ffd9e9;
     --pink-soft: #fff0f7;
+    --pink-deep: #d87fa9;
 
     --purple: #a98bc4;
     --purple-light: #e8d9f1;
+    --purple-deep: #8d6bab;
 
     --black: #272129;
     --grey: #77717a;
     --grey-light: #aaa2aa;
 
     --white: #ffffff;
-
     --line: rgba(40, 29, 40, .09);
 
-    --shadow:
-        0 25px 80px rgba(158, 83, 125, .12);
+    --shadow-sm: 0 15px 45px rgba(158, 83, 125, .08);
+    --shadow: 0 25px 80px rgba(158, 83, 125, .12);
+    --shadow-lg: 0 35px 100px rgba(158, 83, 125, .16);
+
+    --ease: cubic-bezier(.16, 1, .3, 1);
+    --ease-soft: cubic-bezier(.4, 0, .2, 1);
+    --ease-spring: cubic-bezier(.34, 1.56, .64, 1);
 }
 
-
 /* =========================================================
-   BACKGROUND
+   GRAIN OVERLAY
 ========================================================= */
-
-.background {
+body::before {
+    content: "";
     position: fixed;
     inset: 0;
+    z-index: 9998;
+    pointer-events: none;
+    opacity: .035;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.9'/%3E%3C/svg%3E");
+}
 
+/* =========================================================
+   AURORA / MESH BACKGROUND
+========================================================= */
+.aurora {
+    position: fixed;
+    inset: 0;
     z-index: -10;
-
     overflow: hidden;
-
     pointer-events: none;
 }
 
-.blob {
+.aurora-blob {
     position: absolute;
-
     border-radius: 50%;
-
-    filter: blur(80px);
-
-    opacity: .5;
-
-    animation:
-        blobMove 15s ease-in-out infinite alternate;
+    filter: blur(90px);
+    opacity: .55;
+    will-change: transform;
 }
 
-.blob.one {
-
-    width: 380px;
-    height: 380px;
-
-    left: -130px;
-    top: 5%;
-
-    background: #ffd4e7;
+.aurora-blob.b1 {
+    width: 520px; height: 520px;
+    left: -180px; top: -80px;
+    background: radial-gradient(circle, #ffcbe2, transparent 70%);
+    animation: auroraDrift1 22s ease-in-out infinite alternate;
+}
+.aurora-blob.b2 {
+    width: 460px; height: 460px;
+    right: -160px; top: 25%;
+    background: radial-gradient(circle, #e2cdf3, transparent 70%);
+    animation: auroraDrift2 26s ease-in-out infinite alternate;
+}
+.aurora-blob.b3 {
+    width: 440px; height: 440px;
+    left: 32%; bottom: -180px;
+    background: radial-gradient(circle, #ffd0e5, transparent 70%);
+    animation: auroraDrift3 24s ease-in-out infinite alternate;
+}
+.aurora-blob.b4 {
+    width: 380px; height: 380px;
+    right: 10%; bottom: 8%;
+    background: radial-gradient(circle, #f5d8ff, transparent 70%);
+    animation: auroraDrift1 30s ease-in-out infinite alternate-reverse;
 }
 
-.blob.two {
-
-    width: 330px;
-    height: 330px;
-
-    right: -100px;
-    top: 35%;
-
-    background: #ead9f5;
-
-    animation-delay: -4s;
+@keyframes auroraDrift1 {
+    from { transform: translate3d(0, 0, 0) scale(1); }
+    to   { transform: translate3d(80px, -60px, 0) scale(1.2); }
+}
+@keyframes auroraDrift2 {
+    from { transform: translate3d(0, 0, 0) scale(1); }
+    to   { transform: translate3d(-70px, 50px, 0) scale(1.15); }
+}
+@keyframes auroraDrift3 {
+    from { transform: translate3d(0, 0, 0) scale(1); }
+    to   { transform: translate3d(60px, -40px, 0) scale(1.25); }
 }
 
-.blob.three {
-
-    width: 300px;
-    height: 300px;
-
-    left: 30%;
-    bottom: -130px;
-
-    background: #ffcde3;
-
-    animation-delay: -8s;
+/* =========================================================
+   PRELOADER
+========================================================= */
+.preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 100000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #fff8fc, #fff0f7, #f8effd);
+    transition: opacity .8s var(--ease), visibility .8s;
+}
+.preloader.done {
+    opacity: 0;
+    visibility: hidden;
 }
 
-@keyframes blobMove {
-
-    from {
-        transform:
-            translate3d(0,0,0)
-            scale(1);
-    }
-
-    to {
-        transform:
-            translate3d(60px,-35px,0)
-            scale(1.15);
-    }
+.preloader-inner {
+    text-align: center;
 }
 
+.preloader-mark {
+    width: 84px; height: 84px;
+    display: grid;
+    place-items: center;
+    margin: 0 auto;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ffd6e8, #e6d2f1);
+    font-family: "Playfair Display", serif;
+    font-size: 38px;
+    color: #6b4d63;
+    box-shadow: 0 20px 50px rgba(200, 130, 170, .2);
+    animation: preloaderPulse 1.6s ease-in-out infinite;
+}
+
+.preloader-name {
+    margin-top: 22px;
+    font-family: "Playfair Display", serif;
+    font-size: 22px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: #8d687a;
+}
+
+.preloader-bar {
+    margin: 22px auto 0;
+    width: 140px;
+    height: 2px;
+    border-radius: 2px;
+    background: rgba(216, 127, 169, .18);
+    overflow: hidden;
+    position: relative;
+}
+.preloader-bar::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, #ef9fc4, #a98bc4);
+    transform-origin: left;
+    animation: preloaderBar 1.6s var(--ease) infinite;
+}
+
+@keyframes preloaderPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.06); }
+}
+@keyframes preloaderBar {
+    0% { transform: scaleX(0); }
+    60% { transform: scaleX(1); transform-origin: left; }
+    61% { transform-origin: right; }
+    100% { transform: scaleX(0); transform-origin: right; }
+}
+
+/* =========================================================
+   READING PROGRESS
+========================================================= */
+.reading-progress {
+    position: fixed;
+    left: 0; top: 0;
+    width: 0;
+    height: 2px;
+    z-index: 10001;
+    background: linear-gradient(90deg, #ef9fc4, #a98bc4, #ef9fc4);
+    box-shadow: 0 0 18px rgba(227, 154, 185, .7);
+    transition: width .1s linear;
+}
+
+/* =========================================================
+   CUSTOM CURSOR
+========================================================= */
+.cursor-dot,
+.cursor-ring {
+    position: fixed;
+    top: 0; left: 0;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    will-change: transform;
+    mix-blend-mode: multiply;
+}
+.cursor-dot {
+    width: 6px; height: 6px;
+    background: #d87fa9;
+    transform: translate(-50%, -50%);
+}
+.cursor-ring {
+    width: 38px; height: 38px;
+    border: 1.5px solid rgba(216, 127, 169, .55);
+    transform: translate(-50%, -50%);
+    transition: width .3s var(--ease), height .3s var(--ease), border-color .3s, background .3s;
+}
+.cursor-ring.hover {
+    width: 62px; height: 62px;
+    border-color: rgba(168, 139, 196, .7);
+    background: rgba(216, 127, 169, .08);
+}
+@media (pointer: coarse) {
+    .cursor-dot, .cursor-ring { display: none; }
+}
 
 /* =========================================================
    FLOATING EMOJIS
 ========================================================= */
-
 .emoji-float {
-
     position: fixed;
-
     z-index: -1;
-
     pointer-events: none;
-
     font-size: 22px;
-
-    opacity: .25;
-
-    animation:
-        floatEmoji 8s ease-in-out infinite;
+    opacity: .28;
+    filter: saturate(1.1);
+    animation: floatEmoji 9s ease-in-out infinite;
+    will-change: transform;
 }
-
-.emoji-1 {
-    left: 8%;
-    top: 24%;
-}
-
-.emoji-2 {
-    right: 8%;
-    top: 18%;
-    animation-delay: -2s;
-}
-
-.emoji-3 {
-    left: 15%;
-    top: 70%;
-    animation-delay: -4s;
-}
-
-.emoji-4 {
-    right: 14%;
-    top: 75%;
-    animation-delay: -6s;
-}
+.emoji-1 { left: 6%; top: 22%; }
+.emoji-2 { right: 7%; top: 16%; animation-delay: -2s; }
+.emoji-3 { left: 12%; top: 72%; animation-delay: -4s; }
+.emoji-4 { right: 12%; top: 78%; animation-delay: -6s; }
 
 @keyframes floatEmoji {
-
-    0%,
-    100% {
-        transform:
-            translateY(0)
-            rotate(-5deg);
-    }
-
-    50% {
-        transform:
-            translateY(-22px)
-            rotate(8deg);
-    }
+    0%, 100% { transform: translateY(0) rotate(-6deg); }
+    50% { transform: translateY(-26px) rotate(10deg); }
 }
 
+/* =========================================================
+   PARTICLES
+========================================================= */
+.u-particle {
+    position: fixed;
+    width: 3px; height: 3px;
+    border-radius: 50%;
+    background: rgba(211, 128, 166, .5);
+    pointer-events: none;
+    z-index: -2;
+    filter: blur(.3px);
+    animation: uParticleFloat linear infinite;
+    will-change: transform, opacity;
+}
+@keyframes uParticleFloat {
+    0% { transform: translate3d(0, 20px, 0); opacity: 0; }
+    15% { opacity: .7; }
+    75% { opacity: .35; }
+    100% { transform: translate3d(24px, -140px, 0); opacity: 0; }
+}
 
 /* =========================================================
    NAVBAR
 ========================================================= */
-
 .navbar {
-
     position: fixed;
-
     left: 50%;
     top: 18px;
-
     transform: translateX(-50%);
-
-    width: min(1120px, calc(100% - 32px));
-
+    width: min(1160px, calc(100% - 32px));
     z-index: 1000;
-
-    padding: 13px 16px;
-
+    padding: 13px 16px 13px 20px;
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
-
-    border:
-        1px solid
-        rgba(255,255,255,.7);
-
+    border: 1px solid rgba(255, 255, 255, .72);
     border-radius: 100px;
-
-    background:
-        rgba(255,255,255,.68);
-
-    backdrop-filter:
-        blur(22px);
-
-    box-shadow:
-        0 10px 40px
-        rgba(115,66,94,.08);
-
-    transition: all .35s ease;
+    background: rgba(255, 255, 255, .62);
+    backdrop-filter: blur(22px) saturate(1.2);
+    -webkit-backdrop-filter: blur(22px) saturate(1.2);
+    box-shadow: 0 12px 45px rgba(115, 66, 94, .08);
+    transition: all .4s var(--ease);
+}
+.navbar.scrolled {
+    background: rgba(255, 255, 255, .84);
+    border-color: rgba(255, 255, 255, .95);
+    box-shadow: 0 18px 55px rgba(105, 65, 90, .13);
+    transform: translateX(-50%) translateY(-2px);
 }
 
 .logo {
-
     display: flex;
-
     align-items: center;
-
-    gap: 9px;
-
+    gap: 10px;
     font-weight: 700;
-
     font-size: 14px;
+    letter-spacing: -.2px;
 }
-
 .logo-mark {
-
-    width: 34px;
-    height: 34px;
-
+    width: 36px; height: 36px;
     display: grid;
     place-items: center;
-
     border-radius: 50%;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ffd6e8,
-            #e6d2f1
-        );
-
-    font-family:
-        "Playfair Display",
-        serif;
-
+    background: linear-gradient(135deg, #ffd6e8, #e6d2f1);
+    font-family: "Playfair Display", serif;
     font-size: 17px;
+    color: #6b4d63;
+    box-shadow: 0 6px 18px rgba(200, 130, 170, .18);
+    transition: transform .5s var(--ease-spring);
 }
+.logo:hover .logo-mark { transform: rotate(-8deg) scale(1.08); }
 
 .nav-links {
-
     display: flex;
-
     align-items: center;
-
-    gap: 27px;
+    gap: 28px;
 }
-
 .nav-links a {
-
     position: relative;
-
     color: #6e6870;
-
     font-size: 10px;
-
     font-weight: 500;
-
-    transition:
-        color .3s ease;
+    letter-spacing: .3px;
+    transition: color .3s ease;
 }
-
-.nav-links a:hover {
-
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -7px;
+    width: 0;
+    height: 1px;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, var(--pink-deep), var(--purple-deep));
+    transition: width .4s var(--ease);
+}
+.nav-links a:hover,
+.nav-links a.active {
     color: #d477a6;
 }
+.nav-links a:hover::after,
+.nav-links a.active::after { width: 100%; }
 
 .nav-button {
-
-    padding:
-        10px 16px;
-
+    position: relative;
+    overflow: hidden;
+    padding: 11px 18px;
     border-radius: 50px;
-
-    background: #272129;
-
+    background: linear-gradient(135deg, #29232b, #443544);
     color: white;
-
     font-size: 10px;
-
-    transition:
-        transform .3s ease,
-        box-shadow .3s ease;
+    font-weight: 500;
+    letter-spacing: .4px;
+    transition: transform .35s var(--ease), box-shadow .35s ease;
+    box-shadow: 0 6px 18px rgba(46, 34, 46, .12);
 }
-
+.nav-button::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-110%);
+    background: linear-gradient(110deg, transparent 25%, rgba(255,255,255,.35) 50%, transparent 75%);
+    transition: transform .7s var(--ease);
+}
+.nav-button:hover::before { transform: translateX(110%); }
 .nav-button:hover {
-
-    transform:
-        translateY(-3px);
-
-    box-shadow:
-        0 10px 25px
-        rgba(39,33,41,.2);
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px rgba(39, 33, 41, .22);
 }
-
 
 /* =========================================================
    HERO
 ========================================================= */
-
 .hero {
-
     min-height: 100svh;
-
     width: 100%;
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
-    padding:
-        150px
-        24px
-        100px;
-
+    padding: 160px 24px 110px;
     position: relative;
-
     text-align: center;
+    overflow: hidden;
+}
+
+.hero::before,
+.hero::after {
+    content: "";
+    position: absolute;
+    border: 1px solid rgba(207, 139, 171, .14);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+}
+.hero::before {
+    width: min(62vw, 720px);
+    height: min(62vw, 720px);
+    right: -18%;
+    top: 12%;
+    animation: slowOrbit 28s linear infinite;
+}
+.hero::after {
+    width: min(38vw, 460px);
+    height: min(38vw, 460px);
+    left: -14%;
+    bottom: 4%;
+    border-style: dashed;
+    opacity: .6;
+    animation: slowOrbitReverse 34s linear infinite;
 }
 
 .hero-inner {
-
     width: min(1050px, 100%);
-
     position: relative;
+    z-index: 2;
 }
 
 .mini-label {
-
     display: inline-flex;
-
     align-items: center;
-
-    gap: 9px;
-
-    padding:
-        8px 13px;
-
-    border:
-        1px solid
-        rgba(224,154,189,.25);
-
+    gap: 10px;
+    padding: 9px 15px;
+    border: 1px solid rgba(224, 154, 189, .25);
     border-radius: 100px;
-
-    background:
-        rgba(255,255,255,.7);
-
+    background: rgba(255, 255, 255, .7);
+    backdrop-filter: blur(10px);
     color: #8d687a;
-
     font-size: 9px;
-
-    letter-spacing: 1.5px;
-
+    letter-spacing: 2px;
     text-transform: uppercase;
-
     opacity: 0;
-
-    transform:
-        translateY(20px);
-
-    animation:
-        appear .9s ease
-        .3s forwards;
+    transform: translateY(20px);
+    box-shadow: 0 10px 30px rgba(188, 116, 150, .08);
+    animation: appear .9s var(--ease) .5s forwards;
 }
-
 .mini-dot {
-
-    width: 6px;
-    height: 6px;
-
+    width: 6px; height: 6px;
     border-radius: 50%;
-
     background: #ec91bb;
-
-    box-shadow:
-        0 0 14px
-        rgba(236,145,187,.7);
+    box-shadow: 0 0 14px rgba(236, 145, 187, .8);
+    animation: pulseDot 2s ease-in-out infinite;
+}
+@keyframes pulseDot {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.35); opacity: .7; }
 }
 
 .hero-title {
-
     margin-top: 32px;
-
-    font-family:
-        "Playfair Display",
-        serif;
-
-    font-size:
-        clamp(
-            65px,
-            12vw,
-            150px
-        );
-
+    font-family: "Playfair Display", serif;
+    font-size: clamp(64px, 12vw, 152px);
     line-height: .82;
-
     font-weight: 400;
-
     letter-spacing: -6px;
-
-    opacity: 0;
-
-    transform:
-        translateY(60px);
-
-    filter:
-        blur(10px);
-
-    animation:
-        titleIn 1.4s
-        cubic-bezier(.16,1,.3,1)
-        .65s forwards;
+    color: #242027;
+    text-shadow: 0 18px 60px rgba(151, 92, 119, .08);
 }
+.hero-title .line {
+    display: block;
+    overflow: hidden;
+}
+.hero-title .line > span {
+    display: inline-block;
+    transform: translateY(110%);
+    opacity: 0;
+    animation: lineRise 1.3s var(--ease) forwards;
+}
+.hero-title .line:nth-child(1) > span { animation-delay: .75s; }
+.hero-title .line:nth-child(2) > span { animation-delay: .9s; }
 
 .hero-title .pink {
-
-    color: #df8caf;
-
+    background: linear-gradient(120deg, #d57d9f 0%, #eeaec7 45%, #b58ac4 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
     font-style: italic;
-
+    padding-right: .08em;
 }
-
 .hero-title .purple {
-
-    color: #a88ab8;
-
+    background: linear-gradient(120deg, #a98bc4 0%, #c39ddb 50%, #d87fa9 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .hero-text {
-
-    max-width: 610px;
-
-    margin:
-        40px auto 0;
-
+    max-width: 620px;
+    margin: 42px auto 0;
     color: #777079;
-
     font-size: 14px;
-
     line-height: 1.9;
-
     opacity: 0;
-
-    transform:
-        translateY(20px);
-
-    animation:
-        appear 1s ease
-        1.1s forwards;
+    transform: translateY(20px);
+    animation: appear 1s var(--ease) 1.15s forwards;
 }
 
 .hero-actions {
-
-    margin-top: 32px;
-
+    margin-top: 34px;
     display: flex;
-
     justify-content: center;
-
     gap: 12px;
-
     flex-wrap: wrap;
-
     opacity: 0;
-
-    animation:
-        appear 1s ease
-        1.35s forwards;
+    animation: appear 1s var(--ease) 1.35s forwards;
 }
 
 .primary-btn,
 .secondary-btn {
-
+    position: relative;
+    overflow: hidden;
     display: inline-flex;
-
     align-items: center;
-
     gap: 12px;
-
-    padding:
-        14px 19px;
-
+    padding: 15px 22px;
     border-radius: 100px;
-
-    cursor: pointer;
-
     font-size: 10px;
-
-    transition:
-        transform .35s ease,
-        box-shadow .35s ease;
+    font-weight: 500;
+    letter-spacing: .4px;
+    cursor: pointer;
+    transition: transform .35s var(--ease), box-shadow .35s ease;
+    will-change: transform;
 }
-
 .primary-btn {
-
-    background:
-        linear-gradient(
-            135deg,
-            #29232b,
-            #443544
-        );
-
+    background: linear-gradient(135deg, #29232b, #443544);
     color: white;
-
-    box-shadow:
-        0 12px 30px
-        rgba(46,34,46,.15);
+    box-shadow: 0 12px 30px rgba(46, 34, 46, .15);
 }
-
 .secondary-btn {
-
-    background:
-        rgba(255,255,255,.75);
-
-    border:
-        1px solid
-        rgba(40,29,40,.1);
-
+    background: rgba(255, 255, 255, .78);
+    border: 1px solid rgba(40, 29, 40, .1);
     color: #5d5660;
+    backdrop-filter: blur(10px);
 }
-
-.primary-btn:hover,
-.secondary-btn:hover {
-
-    transform:
-        translateY(-4px);
+.primary-btn::before,
+.secondary-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-110%);
+    background: linear-gradient(110deg, transparent 25%, rgba(255,255,255,.38) 50%, transparent 75%);
+    transition: transform .7s var(--ease);
 }
+.primary-btn:hover::before,
+.secondary-btn:hover::before { transform: translateX(110%); }
 
-.primary-btn:hover {
-
-    box-shadow:
-        0 18px 35px
-        rgba(46,34,46,.2);
-}
+.primary-btn:hover { box-shadow: 0 18px 40px rgba(46, 34, 46, .22); }
+.secondary-btn:hover { box-shadow: 0 14px 30px rgba(180, 101, 139, .12); }
 
 .hero-emoji {
-
     position: absolute;
-
-    font-size: clamp(35px,5vw,65px);
-
-    animation:
-        heroEmoji 5s
-        ease-in-out
-        infinite;
+    font-size: clamp(38px, 5vw, 68px);
+    filter: drop-shadow(0 12px 24px rgba(200, 130, 170, .18));
+    animation: heroEmoji 5s ease-in-out infinite;
+    will-change: transform;
 }
-
-.hero-emoji.one {
-
-    left: 4%;
-    top: 25%;
-
-}
-
-.hero-emoji.two {
-
-    right: 3%;
-    bottom: 20%;
-
-    animation-delay:
-        -2.5s;
-}
+.hero-emoji.one { left: 4%; top: 26%; }
+.hero-emoji.two { right: 3%; bottom: 22%; animation-delay: -2.5s; }
 
 @keyframes heroEmoji {
-
-    0%,
-    100% {
-        transform:
-            translateY(0)
-            rotate(-8deg);
-    }
-
-    50% {
-        transform:
-            translateY(-18px)
-            rotate(8deg);
-    }
+    0%, 100% { transform: translateY(0) rotate(-8deg); }
+    50% { transform: translateY(-22px) rotate(8deg); }
 }
 
 .scroll-hint {
-
     position: absolute;
-
-    bottom: 25px;
-
+    bottom: 26px;
     left: 50%;
-
-    transform:
-        translateX(-50%);
-
+    transform: translateX(-50%);
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
-
-    gap: 8px;
-
+    gap: 10px;
     color: #9d9199;
-
     font-size: 8px;
-
-    letter-spacing: 2px;
-
+    letter-spacing: 3px;
     text-transform: uppercase;
+    animation: fadeIn 1s var(--ease) 1.8s both;
 }
-
 .scroll-line {
-
     width: 1px;
-    height: 35px;
-
-    background:
-        linear-gradient(
-            #e29abc,
-            transparent
-        );
-
-    animation:
-        scrollLine 2s
-        infinite;
+    height: 40px;
+    background: linear-gradient(#e29abc, transparent);
+    animation: scrollLine 2s ease-in-out infinite;
+    transform-origin: top;
 }
-
 @keyframes scrollLine {
-
-    0%,
-    100% {
-        transform:
-            scaleY(.5);
-        transform-origin:
-            top;
-    }
-
-    50% {
-        transform:
-            scaleY(1);
-        transform-origin:
-            top;
-    }
+    0%, 100% { transform: scaleY(.4); opacity: .6; }
+    50% { transform: scaleY(1); opacity: 1; }
 }
 
+@keyframes appear {
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes lineRise {
+    to { transform: translateY(0); opacity: 1; }
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+@keyframes slowOrbit {
+    to { transform: rotate(360deg); }
+}
+@keyframes slowOrbitReverse {
+    to { transform: rotate(-360deg); }
+}
 
 /* =========================================================
-   GENERAL SECTION
+   SECTION BASE
 ========================================================= */
-
 .section {
-
     width: 100%;
-
-    padding:
-        clamp(100px,12vw,170px)
-        max(22px,7vw);
+    padding: clamp(100px, 12vw, 175px) max(22px, 7vw);
+    position: relative;
 }
-
 .section-inner {
-
-    width: min(1150px,100%);
-
+    width: min(1150px, 100%);
     margin: auto;
 }
 
 .section-label {
-
     display: flex;
-
     align-items: center;
-
-    gap: 11px;
-
+    gap: 12px;
     color: #a3788d;
-
     font-size: 9px;
-
     letter-spacing: 3px;
-
     text-transform: uppercase;
+    font-weight: 500;
+    transition: letter-spacing .5s var(--ease);
 }
-
 .section-label::before {
-
     content: "";
-
-    width: 28px;
+    width: 30px;
     height: 1px;
-
-    background:
-        #e7a4c1;
+    background: linear-gradient(90deg, #e7a4c1, transparent);
 }
+.section:hover .section-label { letter-spacing: 3.6px; }
 
 .section-title {
-
     margin-top: 23px;
-
-    font-family:
-        "Playfair Display",
-        serif;
-
-    font-size:
-        clamp(
-            52px,
-            8vw,
-            100px
-        );
-
+    font-family: "Playfair Display", serif;
+    font-size: clamp(52px, 8vw, 104px);
     line-height: .9;
-
     letter-spacing: -4px;
-
     font-weight: 400;
+    color: #242027;
+    text-wrap: balance;
 }
-
 .section-title em {
-
-    color: #dd8daf;
-
     font-style: italic;
+    background: linear-gradient(120deg, #d783aa, #b28fc8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding-right: .08em;
 }
-
-
-/* =========================================================
-   ABOUT
-========================================================= */
-
-.about-grid {
-
-    margin-top: 65px;
-
-    display: grid;
-
-    grid-template-columns:
-        .9fr
-        1.1fr;
-
-    gap: 22px;
-}
-
-.about-card {
-
-    position: relative;
-
-    min-height: 480px;
-
-    padding: 40px;
-
-    border-radius: 35px;
-
-    overflow: hidden;
-
-    background:
-        rgba(255,255,255,.72);
-
-    border:
-        1px solid
-        rgba(255,255,255,.85);
-
-    box-shadow:
-        var(--shadow);
-}
-
-.about-card.main {
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content:
-        space-between;
-
-    background:
-        linear-gradient(
-            145deg,
-            #fff,
-            #fff0f7
-        );
-}
-
-.about-card.main::before {
-
-    content: "";
-
-    position: absolute;
-
-    width: 300px;
-    height: 300px;
-
-    right: -100px;
-    top: -100px;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle,
-            #f5c6db,
-            transparent 68%
-        );
-}
-
-.about-card.main::after {
-
-    content: "M";
-
-    position: absolute;
-
-    right: 10px;
-    bottom: -80px;
-
-    font-family:
-        "Playfair Display",
-        serif;
-
-    font-size: 340px;
-
-    color:
-        rgba(208,132,167,.07);
-}
-
-.about-top {
-
-    position: relative;
-
-    z-index: 2;
-
-    display: flex;
-
-    justify-content:
-        space-between;
-
-    align-items: flex-start;
-}
-
-.about-number {
-
-    color: #a78c99;
-
-    font-size: 9px;
-
-    letter-spacing: 2px;
-}
-
-.about-big-emoji {
-
-    font-size: 43px;
-
-    animation:
-        softBounce 4s
-        ease-in-out
-        infinite;
-}
-
-@keyframes softBounce {
-
-    0%,
-    100% {
-        transform:
-            rotate(-5deg)
-            translateY(0);
-    }
-
-    50% {
-        transform:
-            rotate(6deg)
-            translateY(-8px);
-    }
-}
-
-.about-bottom {
-
-    position: relative;
-
-    z-index: 2;
-}
-
-.about-name {
-
-    font-family:
-        "Playfair Display",
-        serif;
-
-    font-size:
-        clamp(48px,6vw,72px);
-
-    line-height: .9;
-}
-
-.about-role {
-
-    margin-top: 15px;
-
-    color: #8d8089;
-
-    font-size: 11px;
-}
-
-.about-tags {
-
-    margin-top: 23px;
-
-    display: flex;
-
-    flex-wrap: wrap;
-
-    gap: 8px;
-}
-
-.about-tags span {
-
-    padding:
-        9px 12px;
-
-    border-radius: 50px;
-
-    background:
-        rgba(255,255,255,.8);
-
-    border:
-        1px solid
-        rgba(50,30,45,.08);
-
-    color: #817680;
-
-    font-size: 9px;
-}
-
-.about-text-card {
-
-    min-height: 480px;
-
-    padding: 40px;
-
-    border-radius: 35px;
-
-    background:
-        #29232b;
-
-    color: white;
-
-    position: relative;
-
-    overflow: hidden;
-
-    box-shadow:
-        0 25px 80px
-        rgba(42,31,43,.16);
-}
-
-.about-text-card::before {
-
-    content: "";
-
-    position: absolute;
-
-    width: 400px;
-    height: 400px;
-
-    right: -180px;
-    bottom: -180px;
-
-    border-radius: 50%;
-
-    border:
-        1px solid
-        rgba(255,190,220,.3);
-
-    box-shadow:
-        0 0 0 40px
-        rgba(255,190,220,.04),
-        0 0 0 80px
-        rgba(255,190,220,.025);
-}
-
-.about-quote {
-
-    position: relative;
-
-    z-index: 2;
-
-    font-family:
-        "Playfair Display",
-        serif;
-
-    font-size:
-        clamp(
-            32px,
-            4.5vw,
-            52px
-        );
-
-    line-height: 1.15;
-
-    font-style: italic;
-}
-
-.about-quote span {
-
-    color: #f2aecb;
-}
-
-.about-description {
-
-    position: absolute;
-
-    left: 40px;
-    right: 40px;
-    bottom: 40px;
-
-    max-width: 450px;
-
-    color: #bbb1ba;
-
-    font-size: 13px;
-
-    line-height: 1.9;
-}
-
-
-/* =========================================================
-   SKILLS / CERTIFICATE
-========================================================= */
-
-.skills-grid {
-
-    margin-top: 65px;
-
-    display: grid;
-
-    grid-template-columns:
-        1.1fr
-        .9fr;
-
-    gap: 16px;
-}
-
-.skill-card {
-
-    min-height: 340px;
-
-    padding: 36px;
-
-    border-radius: 32px;
-
-    position: relative;
-
-    overflow: hidden;
-
-    background:
-        rgba(255,255,255,.82);
-
-    border:
-        1px solid
-        rgba(255,255,255,.95);
-
-    box-shadow:
-        0 18px 55px
-        rgba(124,74,101,.08);
-}
-
-.skill-card.highlight {
-
-    background:
-        linear-gradient(
-            145deg,
-            #fff,
-            #f8eef8
-        );
-}
-
-.skill-card.dark {
-
-    background: #29232b;
-
-    color: white;
-}
-
-.skill-card.dark p {
-    color: #bcb0ba;
-}
-
-.skill-badge {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    gap: 8px;
-
-    padding: 8px 14px;
-
-    border-radius: 100px;
-
-    background: #fff0f7;
-
-    color: #98667d;
-
-    font-size: 10px;
-
-    font-weight: 500;
-
-    letter-spacing: .5px;
-}
-
-.skill-card.dark .skill-badge {
-
-    background: rgba(255,255,255,.1);
-
-    color: #edb3cc;
-}
-
-.skill-card h3 {
-
-    margin-top: 22px;
-
-    font-family:
-        "Playfair Display",
-        serif;
-
-    font-size:
-        clamp(36px, 4vw, 52px);
-
-    font-weight: 400;
-
-    line-height: .95;
-}
-
-.skill-card p {
-
-    margin-top: 16px;
-
-    max-width: 380px;
-
-    color: #837b84;
-
-    font-size: 13px;
-
-    line-height: 1.85;
-}
-
-.skill-card .big-emoji {
-
-    position: absolute;
-
-    top: 28px;
-    right: 28px;
-
-    font-size: 42px;
-
-    opacity: .9;
-}
-
-.cert-list {
-
-    margin-top: 28px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 12px;
-}
-
-.cert-item {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 14px;
-
-    padding: 14px 16px;
-
-    border-radius: 16px;
-
-    background: rgba(255,255,255,.08);
-
-    border: 1px solid rgba(255,255,255,.1);
-}
-
-.cert-item .cert-icon {
-
-    width: 40px;
-    height: 40px;
-
-    display: grid;
-    place-items: center;
-
-    border-radius: 12px;
-
-    background: rgba(242,174,203,.15);
-
-    font-size: 18px;
-}
-
-.cert-item .cert-text {
-
-    font-size: 13px;
-
-    line-height: 1.4;
-}
-
-.cert-item .cert-text strong {
-
-    display: block;
-
-    font-weight: 600;
-
-    color: #f2aecb;
-}
-
-
-/* =========================================================
-   INTERESTS
-========================================================= */
-
-.interests {
-
-    background:
-        rgba(255,255,255,.38);
-}
-
-.interest-grid {
-
-    margin-top: 65px;
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap: 16px;
-}
-
-.interest-card {
-
-    min-height: 410px;
-
-    padding: 28px;
-
-    border-radius: 30px;
-
-    position: relative;
-
-    overflow: hidden;
-
-    background:
-        rgba(255,255,255,.8);
-
-    border:
-        1px solid
-        rgba(255,255,255,.95);
-
-    box-shadow:
-        0 15px 50px
-        rgba(124,74,101,.07);
-
-    transition:
-        transform .55s
-        cubic-bezier(.16,1,.3,1),
-        box-shadow .55s ease;
-}
-
-.interest-card:hover {
-
-    transform:
-        translateY(-10px);
-
-    box-shadow:
-        0 30px 70px
-        rgba(124,74,101,.13);
-}
-
-.interest-card:nth-child(2) {
-
-    background:
-        linear-gradient(
-            145deg,
-            #fff,
-            #f9f0ff
-        );
-}
-
-.interest-card:nth-child(3) {
-
-    background:
-        linear-gradient(
-            145deg,
-            #fff,
-            #fff0f7
-        );
-}
-
-.interest-number {
-
-    color: #a3949e;
-
-    font-size: 9px;
-
-    letter-spacing: 2px;
-}
-
-.interest-emoji {
-
-    position: absolute;
-
-    top: 25px;
-    right: 28px;
-
-    font-size: 39px;
-
-    transition:
-        transform .5s ease;
-}
-
-.interest-card:hover
-.interest-emoji {
-
-    transform:
-        scale(1.18)
-        rotate(8deg);
-}
-
-.interest-circle {
-
-    position: absolute;
-
-    width: 230px;
-    height: 230px;
-
-    right: -110px;
-    bottom: -105px;
-
-    border-radius: 50%;
-
-    border:
-        1px solid
-        rgba(211,139,174,.18);
-
-    transition:
-        transform .8s ease;
-}
-
-.interest-card:hover
-.interest-circle {
-
-    transform:
-        scale(1.35)
-        rotate(25deg);
-}
-
-.interest-content {
-
-    position: absolute;
-
-    left: 28px;
-    right: 28px;
-    bottom: 30px;
-}
-
-.interest-content h3 {
-
-    font-family:
-        "Playfair Display",
-        serif;
-
-    font-size:
-        clamp(
-            38px,
-            4vw,
-            55px
-        );
-
-    font-weight: 400;
-}
-
-.interest-content p {
-
-    margin-top: 13px;
-
-    max-width: 320px;
-
-    color: #837a83;
-
-    font-size: 12px;
-
-    line-height: 1.8;
-}
-
-
-/* =========================================================
-   EMOJI SECTION
-========================================================= */
-
-.emoji-section {
-
-    position: relative;
-
-    overflow: hidden;
-}
-
-.emoji-box {
-
-    margin-top: 65px;
-
-    padding:
-        clamp(30px,5vw,65px);
-
-    border-radius: 40px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #fff,
-            #fff0f7 50%,
-            #f7effd
-        );
-
-    border:
-        1px solid
-        rgba(255,255,255,.9);
-
-    box-shadow:
-        var(--shadow);
-
-    text-align: center;
-}
-
-.emoji-box h3 {
-
-    font-family:
-        "Playfair Display",
-        serif;
-
-    font-size:
-        clamp(
-            38px,
-            6vw,
-            70px
-        );
-
-    font-weight: 400;
-}
-
-.emoji-box h3 em {
-
-    color: #dc8dad;
-}
-
-.emoji-box p {
-
-    max-width: 550px;
-
-    margin:
-        20px auto 0;
-
-    color: #827a83;
-
-    font-size: 13px;
-
-    line-height: 1.8;
-}
-
-.emoji-list {
-
-    margin-top: 35px;
-
-    display: flex;
-
-    justify-content:
-        center;
-
-    align-items: center;
-
-    flex-wrap: wrap;
-
-    gap: 12px;
-}
-
-.emoji-button {
-
-    width: 58px;
-    height: 58px;
-
-    display: grid;
-
-    place-items: center;
-
-    border-radius: 20px;
-
-    background:
-        rgba(255,255,255,.85);
-
-    border:
-        1px solid
-        rgba(40,30,40,.07);
-
-    font-size: 27px;
-
-    cursor: pointer;
-
-    transition:
-        transform .35s ease,
-        background .35s ease,
-        box-shadow .35s ease;
-}
-
-.emoji-button:hover {
-
-    transform:
-        translateY(-8px)
-        rotate(5deg)
-        scale(1.08);
-
-    background: white;
-
-    box-shadow:
-        0 15px 30px
-        rgba(180,101,139,.13);
-}
-
-.emoji-result {
-
-    margin-top: 27px;
-
-    min-height: 28px;
-
-    color: #9b657d;
-
-    font-size: 12px;
-
-    transition:
-        opacity .3s ease;
-}
-
-
-/* =========================================================
-   STATEMENT
-========================================================= */
-
-.statement {
-
-    min-height: 90svh;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    text-align: center;
-
-    position: relative;
-}
-
-.statement-orbit {
-
-    position: absolute;
-
-    width:
-        min(600px,80vw);
-
-    height:
-        min(600px,80vw);
-
-    border-radius: 50%;
-
-    border:
-        1px solid
-        rgba(215,140,175,.14);
-
-    animation:
-        orbit 25s
-        linear
-        infinite;
-}
-
-.statement-orbit::before {
-
-    content: "";
-
-    position: absolute;
-
-    width: 10px;
-    height: 10px;
-
-    border-radius: 50%;
-
-    background: #eca0c1;
-
-    top: 10%;
-
-    left: 20%;
-
-    box-shadow:
-        0 0 20px
-        #eca0c1;
-}
-
-@keyframes orbit {
-
-    from {
-        transform:
-            rotate(0deg);
-    }
-
-    to {
-        transform:
-            rotate(360deg);
-    }
-}
-
-.statement-content {
-
-    position: relative;
-
-    z-index: 2;
-
-    max-width: 950px;
-}
-
-.statement-small {
-
-    color: #9d7b8c;
-
-    font-size: 9px;
-
-    letter-spacing: 4px;
-
-    text-transform: uppercase;
-}
-
-.statement-big {
-
-    margin-top: 25px;
-
-    font-family:
-        "Playfair Display",
-        serif;
-
-    font-size:
-        clamp(
-            48px,
-            8vw,
-            105px
-        );
-
-    line-height: .95;
-
-    letter-spacing: -4px;
-}
-
-.statement-big em {
-
-    color: #dc8dad;
-
-    font-style: italic;
-}
-
-.statement-description {
-
-    max-width: 540px;
-
-    margin:
-        30px auto 0;
-
-    color: #837b84;
-
-    font-size: 13px;
-
-    line-height: 1.9;
-}
-
-
-/* =========================================================
-   TRAVEL
-========================================================= */
-
-.travel-grid {
-
-    margin-top: 65px;
-
-    display: grid;
-
-    grid-template-columns:
-        1.25fr
-        .75fr;
-
-    gap: 16px;
-}
-
-.travel-main,
-.travel-small {
-
-    min-height: 470px;
-
-    position: relative;
-
-    overflow: hidden;
-
-    border-radius: 35px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.8);
-
-    box-shadow:
-        var(--shadow);
-}
-
-.travel-main {
-
-    background:
-        linear-gradient(
-            135deg,
-            #fff,
-            #f8e6f1
-        );
-}
-
-.travel-main::before {
-
-    content: "";
-
-    position: absolute;
-
-    width: 500px;
-    height: 500px;
-
-    right: -170px;
-    top: -170px;
-
-    border-radius: 50%;
-
-    border:
-        1px solid
-        rgba(203,133,169,.22);
-
-    box-shadow:
-        0 0 0 40px
-        rgba(203,133,169,.04),
-        0 0 0 80px
-        rgba(203,133,169,.03);
-}
-
-.travel-main-content {
-
-    position: absolute;
-
-    left: 40px;
-    right: 40px;
-    bottom: 40px;
-
-    z-index: 2;
-}
-
-.travel-main-content h3 {
-
-    font-family:
-        "Playfair Display",
-        serif;
-
-    font-size:
-        clamp(
-            60px,
-            8vw,
-            100px
-        );
-
-    font-weight: 400;
-
-    line-height: .8;
-}
-
-.travel-main-content p {
-
-    max-width: 480px;
-
-    margin-top: 20px;
-
-    color: #817880;
-
-    font-size: 13px;
-
-    line-height: 1.9;
-}
-
-.travel-small {
-
-    padding: 35px;
-
-    display: flex;
-
-    align-items: flex-end;
-
-    background:
-        #29232b;
-
-    color: white;
-}
-
-.travel-small-content h3 {
-
-    font-family:
-        "Playfair Display",
-        serif;
-
-    font-size:
-        clamp(
-            48px,
-            6vw,
-            75px
-        );
-
-    font-weight: 400;
-
-    line-height: .9;
-}
-
-.travel-small-content h3 span {
-
-    color: #efb0ca;
-
-    font-style: italic;
-}
-
-.travel-small-content p {
-
-    margin-top: 20px;
-
-    color: #b8adb7;
-
-    font-size: 12px;
-
-    line-height: 1.8;
-}
-
-
-/* =========================================================
-   TIMELINE
-========================================================= */
-
-.timeline {
-
-    margin-top: 65px;
-
-    border-top:
-        1px solid
-        var(--line);
-}
-
-.timeline-item {
-
-    display: grid;
-
-    grid-template-columns:
-        80px
-        1fr
-        auto;
-
-    align-items: center;
-
-    gap: 25px;
-
-    padding:
-        28px 5px;
-
-    border-bottom:
-        1px solid
-        var(--line);
-
-    transition:
-        padding .4s ease,
-        background .4s ease;
-}
-
-.timeline-item:hover {
-
-    padding-left: 20px;
-    padding-right: 20px;
-
-    background:
-        rgba(255,255,255,.65);
-}
-
-.timeline-number {
-
-    color: #aa9aa4;
-
-    font-size: 9px;
-
-    letter-spacing: 2px;
-}
-
-.timeline-title {
-
-    font-family:
-        "Playfair Display",
-        serif;
-
-    font-size: 27px;
-
-    font-weight: 400;
-}
-
-.timeline-text {
-
-    color: #928991;
-
-    font-size: 10px;
-}
-
-
-/* =========================================================
-   PERSONAL PANEL
-========================================================= */
-
-.personal-panel {
-
-    margin-top: 65px;
-
-    display: grid;
-
-    grid-template-columns:
-        1fr
-        1fr;
-
-    gap: 16px;
-}
-
-.panel {
-
-    min-height: 330px;
-
-    padding: 32px;
-
-    border-radius: 30px;
-
-    background:
-        rgba(255,255,255,.78);
-
-    border:
-        1px solid
-        rgba(255,255,255,.9);
-
-    box-shadow:
-        0 15px 50px
-        rgba(120,70,100,.06);
-}
-
-.panel h3 {
-
-    font-family:
-        "Playfair Display",
-        serif;
-
-    font-size: 40px;
-
-    font-weight: 400;
-}
-
-.panel p {
-
-    margin-top: 15px;
-
-    color: #837b84;
-
-    font-size: 12px;
-
-    line-height: 1.9;
-}
-
-.pills {
-
-    margin-top: 25px;
-
-    display: flex;
-
-    flex-wrap: wrap;
-
-    gap: 9px;
-}
-
-.pill {
-
-    padding:
-        9px 13px;
-
-    border-radius: 100px;
-
-    background:
-        #fff0f7;
-
-    color: #98667d;
-
-    font-size: 9px;
-}
-
-.panel.dark {
-
-    background:
-        #29232b;
-
-    color: white;
-}
-
-.panel.dark p {
-
-    color: #bcb0ba;
-}
-
-.panel.dark .pill {
-
-    background:
-        rgba(255,255,255,.08);
-
-    color: #edb3cc;
-}
-
-
-/* =========================================================
-   CONTACT / TELEGRAM
-========================================================= */
-
-.contact-section {
-
-    background:
-        linear-gradient(
-            160deg,
-            #fff4fa,
-            #f8effd 60%,
-            #fff
-        );
-}
-
-.contact-box {
-
-    margin-top: 55px;
-
-    padding: 50px 40px;
-
-    border-radius: 40px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #29232b,
-            #3a2f3c
-        );
-
-    color: white;
-
-    text-align: center;
-
-    position: relative;
-
-    overflow: hidden;
-
-    box-shadow:
-        0 30px 90px
-        rgba(42,31,43,.22);
-}
-
-.contact-box::before {
-
-    content: "";
-
-    position: absolute;
-
-    width: 420px;
-    height: 420px;
-
-    left: -160px;
-    top: -160px;
-
-    border-radius: 50%;
-
-    border: 1px solid rgba(255,190,220,.2);
-
-    box-shadow:
-        0 0 0 50px rgba(255,190,220,.04);
-}
-
-.contact-box::after {
-
-    content: "";
-
-    position: absolute;
-
-    width: 300px;
-    height: 300px;
-
-    right: -120px;
-    bottom: -120px;
-
-    border-radius: 50%;
-
-    background: radial-gradient(circle, rgba(242,174,203,.12), transparent 70%);
-}
-
-.contact-box h3 {
-
-    position: relative;
-    z-index: 2;
-
-    font-family:
-        "Playfair Display",
-        serif;
-
-    font-size:
-        clamp(36px, 6vw, 64px);
-
-    font-weight: 400;
-
-    line-height: 1.05;
-}
-
-.contact-box h3 em {
-
-    color: #f2aecb;
-
-    font-style: italic;
-}
-
-.contact-box > p {
-
-    position: relative;
-    z-index: 2;
-
-    max-width: 480px;
-
-    margin: 20px auto 0;
-
-    color: #c4b8c3;
-
-    font-size: 14px;
-
-    line-height: 1.8;
-}
-
-.telegram-btn {
-
-    position: relative;
-    z-index: 2;
-
-    display: inline-flex;
-
-    align-items: center;
-
-    gap: 12px;
-
-    margin-top: 32px;
-
-    padding: 16px 28px;
-
-    border-radius: 100px;
-
-    background: linear-gradient(135deg, #f2aecb, #e08bb8);
-
-    color: #2a1f2b;
-
-    font-size: 13px;
-
-    font-weight: 600;
-
-    transition:
-        transform .35s ease,
-        box-shadow .35s ease;
-}
-
-.telegram-btn:hover {
-
-    transform: translateY(-5px);
-
-    box-shadow:
-        0 18px 40px
-        rgba(224,139,184,.35);
-}
-
-.telegram-btn .tg-icon {
-
-    font-size: 20px;
-}
-
-
-/* =========================================================
-   FINAL
-========================================================= */
-
-.final {
-
-    min-height: 85svh;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    text-align: center;
-
-    background:
-        linear-gradient(
-            135deg,
-            #fff4fa,
-            #f8effd
-        );
-}
-
-.final-content {
-
-    max-width: 900px;
-}
-
-.final-emoji {
-
-    font-size: 45px;
-
-    animation:
-        softBounce 3s
-        infinite;
-}
-
-.final h2 {
-
-    margin-top: 25px;
-
-    font-family:
-        "Playfair Display",
-        serif;
-
-    font-size:
-        clamp(
-            60px,
-            10vw,
-            130px
-        );
-
-    font-weight: 400;
-
-    line-height: .83;
-
-    letter-spacing: -5px;
-}
-
-.final h2 em {
-
-    color: #dd8faf;
-
-    font-style: italic;
-}
-
-.final p {
-
-    max-width: 500px;
-
-    margin:
-        30px auto;
-
-    color: #817982;
-
-    font-size: 13px;
-
-    line-height: 1.9;
-}
-
-.top-button {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-    padding:
-        13px 19px;
-
-    border-radius: 100px;
-
-    background:
-        #29232b;
-
-    color: white;
-
-    font-size: 10px;
-
-    transition:
-        transform .3s ease,
-        box-shadow .3s ease;
-}
-
-.top-button:hover {
-
-    transform:
-        translateY(-4px);
-
-    box-shadow:
-        0 15px 30px
-        rgba(40,30,40,.18);
-}
-
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-footer {
-
-    width: 100%;
-
-    padding:
-        27px
-        max(22px,7vw);
-
-    display: flex;
-
-    justify-content:
-        space-between;
-
-    gap: 20px;
-
-    border-top:
-        1px solid
-        var(--line);
-
-    color: #968d96;
-
-    font-size: 8px;
-
-    letter-spacing: 2px;
-
-    text-transform: uppercase;
-}
-
 
 /* =========================================================
    REVEAL
 ========================================================= */
-
 .reveal {
-
     opacity: 0;
-
-    transform:
-        translateY(50px);
-
-    filter:
-        blur(7px);
-
+    transform: translateY(55px);
+    filter: blur(8px);
     transition:
-        opacity 1s
-        cubic-bezier(.16,1,.3,1),
-
-        transform 1s
-        cubic-bezier(.16,1,.3,1),
-
-        filter 1s ease;
+        opacity 1.1s var(--ease),
+        transform 1.1s var(--ease),
+        filter 1.1s var(--ease);
+    will-change: transform, opacity, filter;
 }
-
 .reveal.show {
-
     opacity: 1;
-
-    transform:
-        translateY(0);
-
-    filter:
-        blur(0);
+    transform: translateY(0);
+    filter: blur(0);
 }
-
 
 /* =========================================================
-   HERO ANIMATIONS
+   ABOUT
 ========================================================= */
-
-@keyframes appear {
-
-    to {
-
-        opacity: 1;
-
-        transform:
-            translateY(0);
-    }
+.about-grid {
+    margin-top: 65px;
+    display: grid;
+    grid-template-columns: .95fr 1.05fr;
+    gap: 22px;
 }
 
-@keyframes titleIn {
-
-    to {
-
-        opacity: 1;
-
-        transform:
-            translateY(0);
-
-        filter:
-            blur(0);
-    }
+.about-card {
+    position: relative;
+    min-height: 480px;
+    padding: 40px;
+    border-radius: 35px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, .72);
+    border: 1px solid rgba(255, 255, 255, .85);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    transition: transform .6s var(--ease), box-shadow .6s var(--ease), border-color .4s;
+    isolation: isolate;
 }
 
+.about-card.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: linear-gradient(145deg, #ffffff, #fff0f7);
+}
+.about-card.main::before {
+    content: "";
+    position: absolute;
+    width: 320px; height: 320px;
+    right: -110px; top: -110px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #f5c6db, transparent 68%);
+    opacity: .8;
+}
+.about-card.main::after {
+    content: "M";
+    position: absolute;
+    right: 10px; bottom: -90px;
+    font-family: "Playfair Display", serif;
+    font-size: 360px;
+    line-height: 1;
+    color: rgba(208, 132, 167, .07);
+    pointer-events: none;
+}
 
+.about-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(222, 156, 185, .3);
+}
 
+.about-top {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.about-number {
+    color: #a78c99;
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+}
+.about-big-emoji {
+    font-size: 44px;
+    animation: softBounce 4s ease-in-out infinite;
+    filter: drop-shadow(0 8px 16px rgba(200, 130, 170, .18));
+}
+@keyframes softBounce {
+    0%, 100% { transform: rotate(-5deg) translateY(0); }
+    50% { transform: rotate(6deg) translateY(-8px); }
+}
+
+.about-bottom { position: relative; z-index: 2; }
+.about-name {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(48px, 6vw, 76px);
+    line-height: .9;
+    letter-spacing: -2px;
+}
+.about-role {
+    margin-top: 15px;
+    color: #8d8089;
+    font-size: 11px;
+    letter-spacing: .3px;
+}
+.about-tags {
+    margin-top: 23px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.about-tags span {
+    padding: 9px 13px;
+    border-radius: 50px;
+    background: rgba(255, 255, 255, .8);
+    border: 1px solid rgba(50, 30, 45, .08);
+    color: #817680;
+    font-size: 9px;
+    font-weight: 500;
+    transition: transform .35s var(--ease), background .3s, color .3s;
+}
+.about-tags span:hover {
+    transform: translateY(-3px);
+    background: #fff;
+    color: #d477a6;
+}
+
+.about-text-card {
+    position: relative;
+    min-height: 480px;
+    padding: 40px;
+    border-radius: 35px;
+    background: #29232b;
+    color: white;
+    overflow: hidden;
+    box-shadow: 0 25px 80px rgba(42, 31, 43, .18);
+    transition: transform .6s var(--ease), box-shadow .6s var(--ease);
+    isolation: isolate;
+}
+.about-text-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 35px 100px rgba(42, 31, 43, .24);
+}
+.about-text-card::before {
+    content: "";
+    position: absolute;
+    width: 420px; height: 420px;
+    right: -180px; bottom: -180px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 190, 220, .3);
+    box-shadow:
+        0 0 0 40px rgba(255, 190, 220, .04),
+        0 0 0 80px rgba(255, 190, 220, .025);
+}
+
+.about-quote {
+    position: relative;
+    z-index: 2;
+    font-family: "Playfair Display", serif;
+    font-size: clamp(32px, 4.5vw, 54px);
+    line-height: 1.15;
+    font-style: italic;
+    letter-spacing: -1px;
+}
+.about-quote span {
+    background: linear-gradient(120deg, #f2aecb, #c9a5dd);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.about-description {
+    position: absolute;
+    left: 40px; right: 40px; bottom: 40px;
+    max-width: 460px;
+    color: #bbb1ba;
+    font-size: 13px;
+    line-height: 1.9;
+}
+
+/* =========================================================
+   SKILLS
+========================================================= */
+.skills-grid {
+    margin-top: 65px;
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap: 16px;
+}
+
+.skill-card {
+    position: relative;
+    min-height: 340px;
+    padding: 38px;
+    border-radius: 32px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, .82);
+    border: 1px solid rgba(255, 255, 255, .95);
+    box-shadow: var(--shadow-sm);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    transition: transform .6s var(--ease), box-shadow .6s var(--ease), border-color .4s;
+    isolation: isolate;
+}
+.skill-card.highlight { background: linear-gradient(145deg, #ffffff, #f8eef8); }
+.skill-card.dark {
+    background: #29232b;
+    color: white;
+}
+.skill-card.dark p { color: #bcb0ba; }
+
+.skill-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow);
+    border-color: rgba(222, 156, 185, .3);
+}
+.skill-card.dark:hover { border-color: rgba(242, 174, 203, .2); }
+
+.skill-card::before {
+    content: "";
+    position: absolute;
+    width: 200px; height: 200px;
+    top: -100px; left: -100px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, .7), transparent 68%);
+    opacity: .7;
+    transition: transform .9s var(--ease);
+    pointer-events: none;
+    z-index: 0;
+}
+.skill-card.dark::before {
+    background: radial-gradient(circle, rgba(242, 174, 203, .18), transparent 68%);
+}
+.skill-card:hover::before { transform: translate(70px, 70px); }
+
+.skill-badge {
+    position: relative;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 100px;
+    background: #fff0f7;
+    color: #98667d;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: .5px;
+}
+.skill-card.dark .skill-badge {
+    background: rgba(255, 255, 255, .1);
+    color: #edb3cc;
+}
+
+.skill-card h3 {
+    position: relative;
+    z-index: 2;
+    margin-top: 22px;
+    font-family: "Playfair Display", serif;
+    font-size: clamp(36px, 4vw, 54px);
+    font-weight: 400;
+    line-height: .95;
+    letter-spacing: -1.5px;
+}
+.skill-card p {
+    position: relative;
+    z-index: 2;
+    margin-top: 16px;
+    max-width: 400px;
+    color: #837b84;
+    font-size: 13px;
+    line-height: 1.85;
+}
+.skill-card .big-emoji {
+    position: absolute;
+    top: 30px; right: 30px;
+    font-size: 44px;
+    opacity: .9;
+    transition: transform .6s var(--ease-spring);
+    filter: drop-shadow(0 8px 16px rgba(200, 130, 170, .18));
+}
+.skill-card:hover .big-emoji {
+    transform: rotate(12deg) scale(1.15);
+}
+
+.cert-list {
+    position: relative;
+    z-index: 2;
+    margin-top: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.cert-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 15px 17px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, .08);
+    border: 1px solid rgba(255, 255, 255, .1);
+    transition: transform .4s var(--ease), background .3s, border-color .3s;
+}
+.cert-item:hover {
+    transform: translateX(6px);
+    background: rgba(255, 255, 255, .12);
+    border-color: rgba(242, 174, 203, .25);
+}
+.cert-item .cert-icon {
+    width: 42px; height: 42px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: rgba(242, 174, 203, .15);
+    font-size: 18px;
+    flex-shrink: 0;
+}
+.cert-item .cert-text {
+    font-size: 12px;
+    line-height: 1.5;
+    color: #d8cdd6;
+}
+.cert-item .cert-text strong {
+    display: block;
+    font-weight: 600;
+    color: #f2aecb;
+    font-size: 13px;
+    margin-bottom: 2px;
+}
+
+/* =========================================================
+   INTERESTS
+========================================================= */
+.interests { background: rgba(255, 255, 255, .35); }
+
+.interest-grid {
+    margin-top: 65px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.interest-card {
+    position: relative;
+    min-height: 420px;
+    padding: 30px;
+    border-radius: 30px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, .82);
+    border: 1px solid rgba(255, 255, 255, .95);
+    box-shadow: 0 15px 50px rgba(124, 74, 101, .07);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    transition:
+        transform .6s var(--ease),
+        box-shadow .6s var(--ease),
+        border-color .4s;
+    transform-style: preserve-3d;
+    isolation: isolate;
+}
+.interest-card:nth-child(2) { background: linear-gradient(145deg, #ffffff, #f9f0ff); }
+.interest-card:nth-child(3) { background: linear-gradient(145deg, #ffffff, #fff0f7); }
+
+.interest-card:hover {
+    box-shadow: 0 30px 80px rgba(124, 74, 101, .14);
+    border-color: rgba(222, 156, 185, .3);
+}
+
+.interest-card::before {
+    content: "";
+    position: absolute;
+    width: 190px; height: 190px;
+    top: -95px; left: -95px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, .85), transparent 68%);
+    opacity: .75;
+    transition: transform .9s var(--ease);
+    pointer-events: none;
+    z-index: 0;
+}
+.interest-card:hover::before { transform: translate(75px, 75px); }
+
+.interest-number {
+    position: relative;
+    z-index: 2;
+    color: #a3949e;
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+}
+.interest-emoji {
+    position: absolute;
+    top: 26px; right: 30px;
+    z-index: 2;
+    font-size: 40px;
+    transition: transform .6s var(--ease-spring);
+    filter: drop-shadow(0 10px 20px rgba(200, 130, 170, .18));
+}
+.interest-card:hover .interest-emoji {
+    transform: scale(1.2) rotate(10deg);
+}
+
+.interest-circle {
+    position: absolute;
+    width: 240px; height: 240px;
+    right: -115px; bottom: -110px;
+    border-radius: 50%;
+    border: 1px solid rgba(211, 139, 174, .2);
+    transition: transform .9s var(--ease);
+}
+.interest-card:hover .interest-circle {
+    transform: scale(1.4) rotate(30deg);
+}
+
+.interest-content {
+    position: absolute;
+    left: 30px; right: 30px; bottom: 32px;
+    z-index: 2;
+}
+.interest-content h3 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(38px, 4vw, 56px);
+    font-weight: 400;
+    line-height: .95;
+    letter-spacing: -1.5px;
+}
+.interest-content p {
+    margin-top: 14px;
+    max-width: 320px;
+    color: #837a83;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+/* =========================================================
+   MARQUEE
+========================================================= */
+.marquee-section {
+    padding: 40px 0;
+    overflow: hidden;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: rgba(255, 255, 255, .3);
+}
+.marquee {
+    display: flex;
+    gap: 60px;
+    width: max-content;
+    animation: marqueeScroll 32s linear infinite;
+    will-change: transform;
+}
+.marquee:hover { animation-play-state: paused; }
+.marquee-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+    font-family: "Playfair Display", serif;
+    font-size: clamp(28px, 3.5vw, 46px);
+    color: #c4b3be;
+    letter-spacing: -1px;
+    white-space: nowrap;
+}
+.marquee-item .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ef9fc4, #a98bc4);
+    box-shadow: 0 0 15px rgba(239, 159, 196, .6);
+    flex-shrink: 0;
+}
+.marquee-item em {
+    font-style: italic;
+    background: linear-gradient(120deg, #d783aa, #b28fc8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+@keyframes marqueeScroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+/* =========================================================
+   EMOJI SECTION
+========================================================= */
+.emoji-section { position: relative; overflow: hidden; }
+
+.emoji-box {
+    margin-top: 65px;
+    padding: clamp(32px, 5vw, 68px);
+    border-radius: 40px;
+    background: linear-gradient(135deg, #ffffff, #fff0f7 50%, #f7effd);
+    border: 1px solid rgba(255, 255, 255, .9);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    text-align: center;
+    position: relative;
+    isolation: isolate;
+}
+.emoji-box h3 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(38px, 6vw, 74px);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -2px;
+}
+.emoji-box h3 em {
+    font-style: italic;
+    background: linear-gradient(120deg, #d783aa, #b28fc8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.emoji-box p {
+    max-width: 560px;
+    margin: 22px auto 0;
+    color: #827a83;
+    font-size: 13px;
+    line-height: 1.85;
+}
+
+.emoji-list {
+    margin-top: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.emoji-button {
+    width: 60px; height: 60px;
+    display: grid;
+    place-items: center;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, .88);
+    border: 1px solid rgba(40, 30, 40, .07);
+    font-size: 28px;
+    cursor: pointer;
+    transition:
+        transform .4s var(--ease-spring),
+        background .35s ease,
+        box-shadow .35s ease;
+    will-change: transform;
+}
+.emoji-button:hover {
+    transform: translateY(-9px) rotate(6deg) scale(1.1);
+    background: #ffffff;
+    box-shadow: 0 18px 35px rgba(180, 101, 139, .16);
+}
+.emoji-button:active {
+    transform: translateY(-4px) scale(.98);
+}
+
+.emoji-result {
+    margin-top: 28px;
+    min-height: 28px;
+    color: #9b657d;
+    font-size: 13px;
+    font-weight: 500;
+    transition: opacity .3s ease;
+}
+
+/* =========================================================
+   STATEMENT
+========================================================= */
+.statement {
+    min-height: 90svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+}
+.statement-orbit {
+    position: absolute;
+    width: min(620px, 82vw);
+    height: min(620px, 82vw);
+    border-radius: 50%;
+    border: 1px solid rgba(215, 140, 175, .16);
+    animation: slowOrbit 30s linear infinite;
+}
+.statement-orbit::before {
+    content: "";
+    position: absolute;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: #eca0c1;
+    top: 10%; left: 20%;
+    box-shadow: 0 0 22px #eca0c1;
+}
+.statement-orbit::after {
+    content: "";
+    position: absolute;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #a98bc4;
+    bottom: 15%; right: 18%;
+    box-shadow: 0 0 18px #a98bc4;
+}
+
+.statement-content {
+    position: relative;
+    z-index: 2;
+    max-width: 950px;
+}
+.statement-small {
+    color: #9d7b8c;
+    font-size: 9px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+.statement-big {
+    margin-top: 26px;
+    font-family: "Playfair Display", serif;
+    font-size: clamp(48px, 8vw, 110px);
+    line-height: .95;
+    letter-spacing: -4px;
+    font-weight: 400;
+}
+.statement-big em {
+    font-style: italic;
+    background: linear-gradient(120deg, #dc8dad, #b28fc8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.statement-description {
+    max-width: 560px;
+    margin: 32px auto 0;
+    color: #837b84;
+    font-size: 13px;
+    line-height: 1.9;
+}
+
+/* =========================================================
+   TRAVEL
+========================================================= */
+.travel-grid {
+    margin-top: 65px;
+    display: grid;
+    grid-template-columns: 1.25fr .75fr;
+    gap: 16px;
+}
+.travel-main,
+.travel-small {
+    position: relative;
+    min-height: 480px;
+    overflow: hidden;
+    border-radius: 35px;
+    border: 1px solid rgba(255, 255, 255, .8);
+    box-shadow: var(--shadow);
+    transition: transform .6s var(--ease), box-shadow .6s var(--ease);
+    isolation: isolate;
+}
+.travel-main:hover,
+.travel-small:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+}
+
+.travel-main {
+    background: linear-gradient(135deg, #ffffff, #f8e6f1);
+}
+.travel-main::before {
+    content: "";
+    position: absolute;
+    width: 520px; height: 520px;
+    right: -180px; top: -180px;
+    border-radius: 50%;
+    border: 1px solid rgba(203, 133, 169, .22);
+    box-shadow:
+        0 0 0 40px rgba(203, 133, 169, .04),
+        0 0 0 80px rgba(203, 133, 169, .03);
+}
+.travel-main::after {
+    content: "✈";
+    position: absolute;
+    top: 40px; right: 50px;
+    font-size: 60px;
+    opacity: .15;
+    transform: rotate(15deg);
+    transition: transform .8s var(--ease);
+}
+.travel-main:hover::after {
+    transform: rotate(25deg) translate(10px, -10px) scale(1.15);
+}
+
+.travel-main-content {
+    position: absolute;
+    left: 42px; right: 42px; bottom: 42px;
+    z-index: 2;
+}
+.travel-main-content h3 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(60px, 8vw, 104px);
+    font-weight: 400;
+    line-height: .8;
+    letter-spacing: -3px;
+    margin-top: 14px;
+}
+.travel-main-content p {
+    max-width: 500px;
+    margin-top: 22px;
+    color: #817880;
+    font-size: 13px;
+    line-height: 1.9;
+}
+
+.travel-small {
+    padding: 36px;
+    display: flex;
+    align-items: flex-end;
+    background: #29232b;
+    color: white;
+}
+.travel-small::before {
+    content: "";
+    position: absolute;
+    width: 260px; height: 260px;
+    left: -100px; top: -80px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 190, 220, .18);
+    box-shadow: 0 0 0 40px rgba(255, 190, 220, .03);
+}
+.travel-small-content { position: relative; z-index: 2; }
+.travel-small-content h3 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(48px, 6vw, 78px);
+    font-weight: 400;
+    line-height: .9;
+    letter-spacing: -2px;
+    margin-top: 14px;
+}
+.travel-small-content h3 span {
+    font-style: italic;
+    background: linear-gradient(120deg, #efb0ca, #c9a5dd);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.travel-small-content p {
+    margin-top: 22px;
+    color: #b8adb7;
+    font-size: 12px;
+    line-height: 1.85;
+}
+.travel-small .section-label {
+    color: #b8adb7;
+}
+.travel-small .section-label::before {
+    background: linear-gradient(90deg, rgba(242, 174, 203, .6), transparent);
+}
+
+/* =========================================================
+   TIMELINE
+========================================================= */
+.timeline {
+    margin-top: 65px;
+    border-top: 1px solid var(--line);
+    position: relative;
+}
+.timeline-item {
+    position: relative;
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    align-items: center;
+    gap: 25px;
+    padding: 30px 5px;
+    border-bottom: 1px solid var(--line);
+    transition:
+        padding .5s var(--ease),
+        background .5s var(--ease);
+    overflow: hidden;
+}
+.timeline-item::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, transparent, #d87fa9, transparent);
+    transform: scaleY(0);
+    transform-origin: center;
+    transition: transform .5s var(--ease);
+}
+.timeline-item:hover::before { transform: scaleY(1); }
+
+.timeline-item:hover {
+    padding-left: 25px;
+    padding-right: 25px;
+    background: rgba(255, 255, 255, .7);
+}
+.timeline-number {
+    color: #aa9aa4;
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+}
+.timeline-title {
+    font-family: "Playfair Display", serif;
+    font-size: 28px;
+    font-weight: 400;
+    letter-spacing: -1px;
+    transition: color .3s;
+}
+.timeline-item:hover .timeline-title { color: #d477a6; }
+.timeline-text {
+    color: #928991;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+/* =========================================================
+   PERSONAL PANEL
+========================================================= */
+.personal-panel {
+    margin-top: 65px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+.panel {
+    position: relative;
+    min-height: 340px;
+    padding: 34px;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, .8);
+    border: 1px solid rgba(255, 255, 255, .9);
+    box-shadow: 0 15px 50px rgba(120, 70, 100, .07);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    transition: transform .6s var(--ease), box-shadow .6s var(--ease), border-color .4s;
+    isolation: isolate;
+    overflow: hidden;
+}
+.panel:hover {
+    transform: translateY(-7px);
+    box-shadow: var(--shadow);
+    border-color: rgba(222, 156, 185, .3);
+}
+.panel::before {
+    content: "";
+    position: absolute;
+    width: 180px; height: 180px;
+    top: -90px; left: -90px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, .8), transparent 68%);
+    opacity: .7;
+    transition: transform .9s var(--ease);
+    pointer-events: none;
+}
+.panel:hover::before { transform: translate(70px, 70px); }
+
+.panel h3 {
+    position: relative;
+    z-index: 2;
+    font-family: "Playfair Display", serif;
+    font-size: 42px;
+    font-weight: 400;
+    letter-spacing: -1.5px;
+}
+.panel p {
+    position: relative;
+    z-index: 2;
+    margin-top: 16px;
+    color: #837b84;
+    font-size: 13px;
+    line-height: 1.9;
+}
+
+.pills {
+    position: relative;
+    z-index: 2;
+    margin-top: 26px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+}
+.pill {
+    padding: 9px 14px;
+    border-radius: 100px;
+    background: #fff0f7;
+    color: #98667d;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: .3px;
+    transition: transform .35s var(--ease), background .3s;
+}
+.pill:hover {
+    transform: translateY(-3px);
+    background: #ffffff;
+}
+
+.panel.dark {
+    background: #29232b;
+    color: white;
+}
+.panel.dark p { color: #bcb0ba; }
+.panel.dark .pill {
+    background: rgba(255, 255, 255, .08);
+    color: #edb3cc;
+}
+.panel.dark .pill:hover { background: rgba(255, 255, 255, .14); }
+.panel.dark::before {
+    background: radial-gradient(circle, rgba(242, 174, 203, .15), transparent 68%);
+}
+
+/* =========================================================
+   CONTACT
+========================================================= */
+.contact-section {
+    background: linear-gradient(160deg, #fff4fa, #f8effd 60%, #ffffff);
+}
+.contact-box {
+    margin-top: 55px;
+    padding: 60px 45px;
+    border-radius: 40px;
+    background: linear-gradient(145deg, #29232b, #3a2f3c);
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 30px 90px rgba(42, 31, 43, .25);
+    isolation: isolate;
+}
+.contact-box::before {
+    content: "";
+    position: absolute;
+    width: 440px; height: 440px;
+    left: -170px; top: -170px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 190, 220, .22);
+    box-shadow: 0 0 0 50px rgba(255, 190, 220, .04);
+}
+.contact-box::after {
+    content: "";
+    position: absolute;
+    width: 320px; height: 320px;
+    right: -130px; bottom: -130px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(242, 174, 203, .15), transparent 70%);
+}
+
+.contact-box h3 {
+    position: relative;
+    z-index: 2;
+    font-family: "Playfair Display", serif;
+    font-size: clamp(36px, 6vw, 68px);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -2px;
+}
+.contact-box h3 em {
+    font-style: italic;
+    background: linear-gradient(120deg, #f2aecb, #c9a5dd);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.contact-box > p {
+    position: relative;
+    z-index: 2;
+    max-width: 500px;
+    margin: 22px auto 0;
+    color: #c4b8c3;
+    font-size: 14px;
+    line-height: 1.85;
+}
+
+.telegram-btn {
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 34px;
+    padding: 18px 32px;
+    border-radius: 100px;
+    background: linear-gradient(135deg, #f2aecb, #e08bb8);
+    color: #2a1f2b;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .3px;
+    box-shadow: 0 14px 35px rgba(224, 139, 184, .22);
+    transition: transform .35s var(--ease), box-shadow .35s ease;
+    will-change: transform;
+}
+.telegram-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-120%);
+    background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, .35) 50%, transparent 70%);
+    transition: transform .8s var(--ease);
+}
+.telegram-btn:hover::before { transform: translateX(120%); }
+.telegram-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 45px rgba(224, 139, 184, .4);
+}
+.telegram-btn .tg-icon {
+    font-size: 20px;
+    transition: transform .5s var(--ease-spring);
+}
+.telegram-btn:hover .tg-icon {
+    transform: rotate(-15deg) translateX(2px);
+}
+
+/* =========================================================
+   FINAL
+========================================================= */
+.final {
+    min-height: 85svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(135deg, #fff4fa, #f8effd);
+    overflow: hidden;
+    position: relative;
+}
+.final::before {
+    content: "";
+    position: absolute;
+    width: min(720px, 92vw);
+    height: min(720px, 92vw);
+    border-radius: 50%;
+    border: 1px dashed rgba(216, 127, 169, .18);
+    animation: slowOrbit 44s linear infinite;
+}
+.final-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+}
+.final-emoji {
+    font-size: 48px;
+    animation: softBounce 3s ease-in-out infinite;
+    display: inline-block;
+}
+.final h2 {
+    margin-top: 26px;
+    font-family: "Playfair Display", serif;
+    font-size: clamp(60px, 10vw, 136px);
+    font-weight: 400;
+    line-height: .83;
+    letter-spacing: -5px;
+}
+.final h2 em {
+    font-style: italic;
+    background: linear-gradient(120deg, #d783aa, #b28fc8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.final p {
+    max-width: 520px;
+    margin: 32px auto;
+    color: #817982;
+    font-size: 13px;
+    line-height: 1.9;
+}
+.top-button {
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 22px;
+    border-radius: 100px;
+    background: #29232b;
+    color: white;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: .4px;
+    box-shadow: 0 10px 25px rgba(40, 30, 40, .15);
+    transition: transform .35s var(--ease), box-shadow .35s ease;
+    will-change: transform;
+}
+.top-button::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-110%);
+    background: linear-gradient(110deg, transparent 25%, rgba(255, 255, 255, .35) 50%, transparent 75%);
+    transition: transform .7s var(--ease);
+}
+.top-button:hover::before { transform: translateX(110%); }
+.top-button:hover {
+    box-shadow: 0 18px 40px rgba(40, 30, 40, .22);
+}
+.top-button span { transition: transform .4s var(--ease); }
+.top-button:hover span { transform: translateY(-3px); }
+
+/* =========================================================
+   FOOTER
+========================================================= */
+footer {
+    width: 100%;
+    padding: 30px max(22px, 7vw);
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    border-top: 1px solid var(--line);
+    color: #968d96;
+    font-size: 8px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    background: rgba(255, 255, 255, .3);
+    backdrop-filter: blur(10px);
+}
 
 /* =========================================================
    EMOJI RAIN
 ========================================================= */
-
 .emoji-rain {
     position: fixed;
-    top: -60px;
+    top: -70px;
     z-index: 9999;
     pointer-events: none;
     font-size: 28px;
     user-select: none;
     will-change: transform, opacity;
     animation: emojiFall linear forwards;
+    filter: drop-shadow(0 4px 10px rgba(200, 130, 170, .25));
 }
-
 @keyframes emojiFall {
     0% {
         transform: translateY(0) rotate(0deg) scale(1);
         opacity: 1;
     }
-    80% {
-        opacity: 1;
-    }
+    80% { opacity: 1; }
     100% {
-        transform: translateY(110vh) rotate(var(--rot)) scale(0.6);
+        transform: translateY(110vh) rotate(var(--rot)) scale(.6);
         opacity: 0;
     }
 }
 
-
 /* =========================================================
    MOBILE
 ========================================================= */
-
-@media (max-width: 850px) {
-
-    .nav-links {
-        display: none;
-    }
-
-    .navbar {
-        width:
-            calc(100% - 24px);
-    }
-
+@media (max-width: 950px) {
     .about-grid,
-    .skills-grid {
-
-        grid-template-columns:
-            1fr;
-    }
-
-    .interest-grid {
-
-        grid-template-columns:
-            1fr;
-    }
-
-    .travel-grid {
-
-        grid-template-columns:
-            1fr;
-    }
-
+    .skills-grid,
+    .travel-grid,
     .personal-panel {
-
-        grid-template-columns:
-            1fr;
+        grid-template-columns: 1fr;
     }
-
-    .about-card,
-    .about-text-card {
-
-        min-height:
-            420px;
+    .interest-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
-
-    .skill-card {
-        min-height: 300px;
+    .interest-card:nth-child(3) {
+        grid-column: 1 / -1;
     }
 }
 
+@media (max-width: 850px) {
+    .nav-links { display: none; }
+    .navbar { width: calc(100% - 24px); }
+    .about-card,
+    .about-text-card { min-height: 430px; }
+    .skill-card { min-height: 300px; }
+}
 
-@media (max-width: 600px) {
-
-    body {
-        width: 100%;
-        overflow-x: hidden;
-    }
-
+@media (max-width: 640px) {
     .navbar {
-
         top: 10px;
-
-        padding:
-            10px 11px;
-
-        border-radius:
-            80px;
+        padding: 10px 12px 10px 14px;
+        border-radius: 80px;
     }
+    .logo { font-size: 12px; gap: 8px; }
+    .logo-mark { width: 32px; height: 32px; font-size: 15px; }
+    .nav-button { padding: 9px 14px; font-size: 9px; }
 
-    .logo {
-
-        font-size: 12px;
-    }
-
-    .logo-mark {
-
-        width: 31px;
-        height: 31px;
-    }
-
-    .nav-button {
-
-        padding:
-            9px 13px;
-
-        font-size: 9px;
-    }
-
-    .hero {
-
-        padding:
-            125px
-            18px
-            85px;
-    }
-
+    .hero { padding: 130px 18px 90px; }
     .hero-title {
-
-        font-size:
-            clamp(
-                60px,
-                20vw,
-                100px
-            );
-
-        letter-spacing:
-            -3px;
+        font-size: clamp(58px, 19vw, 96px);
+        letter-spacing: -3px;
     }
+    .hero-text { font-size: 12px; line-height: 1.85; }
+    .hero-emoji { font-size: 34px; }
+    .hero-emoji.one { left: 2%; top: 28%; }
+    .hero-emoji.two { right: 2%; bottom: 20%; }
 
-    .hero-text {
-
-        font-size: 12px;
-
-        line-height: 1.8;
-    }
-
-    .hero-emoji {
-
-        font-size: 32px;
-    }
-
-    .hero-emoji.one {
-
-        left: 2%;
-        top: 27%;
-    }
-
-    .hero-emoji.two {
-
-        right: 2%;
-        bottom: 18%;
-    }
-
-    .section {
-
-        padding:
-            95px
-            18px;
-    }
-
+    .section { padding: 95px 18px; }
     .section-title {
-
-        font-size:
-            clamp(
-                48px,
-                15vw,
-                75px
-            );
-
-        letter-spacing:
-            -2px;
+        font-size: clamp(46px, 14vw, 76px);
+        letter-spacing: -2.5px;
     }
 
     .about-card,
     .about-text-card {
-
-        min-height:
-            390px;
-
-        padding:
-            28px;
-
-        border-radius:
-            28px;
+        min-height: 400px;
+        padding: 28px;
+        border-radius: 28px;
     }
-
-    .about-text-card {
-
-        min-height:
-            410px;
-    }
-
+    .about-text-card { min-height: 420px; }
     .about-description {
-
-        left: 28px;
-        right: 28px;
-        bottom: 28px;
-
+        left: 28px; right: 28px; bottom: 28px;
         font-size: 12px;
     }
 
-    .skill-card {
-        padding: 28px;
-        border-radius: 26px;
-    }
+    .skill-card { padding: 28px; border-radius: 26px; }
+    .skill-card .big-emoji { font-size: 36px; top: 24px; right: 24px; }
 
+    .interest-grid { grid-template-columns: 1fr; gap: 14px; }
     .interest-card {
-
-        min-height:
-            330px;
-
-        border-radius:
-            27px;
-
-        padding:
-            24px;
+        min-height: 330px;
+        border-radius: 27px;
+        padding: 26px;
     }
-
     .interest-content {
-
-        left: 24px;
-        right: 24px;
-        bottom: 25px;
+        left: 26px; right: 26px; bottom: 27px;
     }
+    .interest-content h3 { font-size: 42px; }
 
-    .interest-content h3 {
-
-        font-size:
-            40px;
-    }
-
-    .emoji-box {
-
-        padding:
-            30px 18px;
-
-        border-radius:
-            28px;
-    }
-
+    .emoji-box { padding: 32px 20px; border-radius: 28px; }
     .emoji-button {
-
-        width: 50px;
-        height: 50px;
-
-        border-radius:
-            17px;
-
-        font-size:
-            23px;
+        width: 52px; height: 52px;
+        border-radius: 17px;
+        font-size: 24px;
     }
 
-    .statement {
-
-        min-height:
-            80svh;
-    }
-
+    .statement { min-height: 80svh; }
     .statement-big {
-
-        font-size:
-            clamp(
-                45px,
-                13vw,
-                70px
-            );
-
-        letter-spacing:
-            -2px;
+        font-size: clamp(44px, 12vw, 72px);
+        letter-spacing: -2px;
     }
 
     .travel-main,
     .travel-small {
-
-        min-height:
-            390px;
-
-        border-radius:
-            28px;
+        min-height: 400px;
+        border-radius: 28px;
     }
-
     .travel-main-content {
-
-        left: 26px;
-        right: 26px;
-        bottom: 27px;
+        left: 28px; right: 28px; bottom: 28px;
     }
-
-    .travel-main-content h3 {
-
-        font-size:
-            58px;
-    }
-
-    .travel-small {
-
-        padding:
-            27px;
-    }
+    .travel-main-content h3 { font-size: 62px; }
+    .travel-small { padding: 28px; }
 
     .timeline-item {
-
-        grid-template-columns:
-            40px
-            1fr;
-
+        grid-template-columns: 42px 1fr;
         gap: 14px;
-
-        padding:
-            23px 0;
+        padding: 24px 0;
     }
-
-    .timeline-title {
-
-        font-size:
-            21px;
-    }
-
-    .timeline-text {
-
-        display: none;
-    }
+    .timeline-title { font-size: 22px; }
+    .timeline-text { display: none; }
 
     .panel {
-
-        min-height:
-            290px;
-
-        padding:
-            27px;
-
-        border-radius:
-            27px;
+        min-height: 300px;
+        padding: 28px;
+        border-radius: 27px;
     }
-
-    .panel h3 {
-
-        font-size:
-            35px;
-    }
+    .panel h3 { font-size: 36px; }
 
     .contact-box {
-
-        padding: 40px 24px;
-
+        padding: 44px 24px;
         border-radius: 28px;
+    }
+    .telegram-btn {
+        padding: 16px 26px;
+        font-size: 12px;
     }
 
     .final {
-
-        min-height:
-            78svh;
-
-        padding:
-            80px 18px;
+        min-height: 78svh;
+        padding: 85px 18px;
     }
-
     .final h2 {
-
-        font-size:
-            clamp(
-                58px,
-                18vw,
-                95px
-            );
-
-        letter-spacing:
-            -3px;
+        font-size: clamp(56px, 17vw, 96px);
+        letter-spacing: -3px;
     }
 
     footer {
-
-        flex-direction:
-            column;
-
-        align-items:
-            flex-start;
-
-        padding:
-            24px 18px;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 26px 18px;
+        gap: 10px;
     }
 
+    .marquee-item { font-size: 28px; }
 }
 
-
-/* =========================================================
-   VERY SMALL PHONES
-========================================================= */
-
-@media (max-width: 370px) {
-
-    .hero-title {
-
-        font-size:
-            57px;
-    }
-
-    .hero-text {
-
-        font-size:
-            11px;
-    }
-
-    .section-title {
-
-        font-size:
-            45px;
-    }
-
-    .emoji-button {
-
-        width: 46px;
-        height: 46px;
-
-        font-size:
-            21px;
-    }
+@media (max-width: 380px) {
+    .hero-title { font-size: 54px; }
+    .hero-text { font-size: 11px; }
+    .section-title { font-size: 42px; }
+    .emoji-button { width: 46px; height: 46px; font-size: 20px; }
+    .interest-content h3 { font-size: 36px; }
 }
 
-
 /* =========================================================
-   TOUCH DEVICES
+   TOUCH / ACCESSIBILITY
 ========================================================= */
-
 @media (hover: none) {
-
-    .interest-card:hover {
-
-        transform:
-            none;
+    .interest-card:hover,
+    .skill-card:hover,
+    .about-card:hover,
+    .panel:hover,
+    .travel-main:hover,
+    .travel-small:hover {
+        transform: none;
     }
-
     .primary-btn:hover,
     .secondary-btn:hover,
     .top-button:hover,
-    .telegram-btn:hover {
-
-        transform:
-            none;
-    }
-
-}
-
-
-/* =========================================================
-   MAHBUBA — MODERN SIGNATURE UPGRADE
-   Premium editorial / soft glass / subtle motion
-========================================================= */
-
-:root{
-    --accent:#e39ab9;
-    --accent-2:#b99ad0;
-    --ink:#27222a;
-    --glass:rgba(255,255,255,.64);
-    --glass-strong:rgba(255,255,255,.82);
-    --border:rgba(255,255,255,.78);
-    --ease:cubic-bezier(.16,1,.3,1);
-}
-
-html{
-    scroll-padding-top:100px;
-}
-
-body{
-    background:
-        radial-gradient(circle at 10% 8%, rgba(255,214,232,.42), transparent 26%),
-        radial-gradient(circle at 92% 22%, rgba(231,214,245,.38), transparent 27%),
-        radial-gradient(circle at 50% 92%, rgba(255,225,239,.34), transparent 28%),
-        linear-gradient(135deg,#fffaff 0%,#fff8fc 45%,#fff 100%);
-}
-
-/* Fine grain makes the page feel less "template-like". */
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:9998;
-    opacity:.035;
-    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");
-}
-
-/* Top reading progress */
-.reading-progress{
-    position:fixed;
-    left:0;
-    top:0;
-    width:0;
-    height:2px;
-    z-index:10001;
-    background:linear-gradient(90deg,var(--accent),var(--accent-2));
-    box-shadow:0 0 18px rgba(227,154,185,.65);
-}
-
-/* Cursor glow on desktop */
-.cursor-glow{
-    position:fixed;
-    width:260px;
-    height:260px;
-    border-radius:50%;
-    pointer-events:none;
-    z-index:-1;
-    background:radial-gradient(circle,rgba(239,159,196,.13),transparent 68%);
-    transform:translate(-50%,-50%);
-    transition:opacity .3s ease;
-}
-
-/* Floating decorative rings */
-.hero::before,
-.hero::after{
-    content:"";
-    position:absolute;
-    border:1px solid rgba(210,145,177,.14);
-    border-radius:50%;
-    pointer-events:none;
-}
-.hero::before{
-    width:min(62vw,700px);
-    height:min(62vw,700px);
-    animation:slowOrbit 28s linear infinite;
-}
-.hero::after{
-    width:min(42vw,480px);
-    height:min(42vw,480px);
-    border-style:dashed;
-    opacity:.45;
-    animation:slowOrbitReverse 36s linear infinite;
-}
-
-.hero-inner{
-    z-index:2;
-}
-
-.hero-title{
-    text-shadow:0 10px 45px rgba(128,75,105,.08);
-}
-
-.hero-title .pink,
-.hero-title .purple,
-.section-title em,
-.statement-big em,
-.final h2 em{
-    background:linear-gradient(120deg,#d783aa,#b28fc8);
-    -webkit-background-clip:text;
-    background-clip:text;
-    -webkit-text-fill-color:transparent;
-}
-
-/* Glass navbar becomes more premium after scrolling */
-.navbar.scrolled{
-    background:rgba(255,255,255,.82);
-    border-color:rgba(255,255,255,.92);
-    box-shadow:0 16px 55px rgba(105,65,90,.13);
-    transform:translateX(-50%) translateY(-2px);
-}
-
-/* Elegant nav underline */
-.nav-links a::after{
-    content:"";
-    position:absolute;
-    left:0;
-    bottom:-7px;
-    width:100%;
-    height:1px;
-    transform:scaleX(0);
-    transform-origin:right;
-    background:linear-gradient(90deg,var(--accent),var(--accent-2));
-    transition:transform .45s var(--ease);
-}
-.nav-links a:hover::after,
-.nav-links a.active::after{
-    transform:scaleX(1);
-    transform-origin:left;
-}
-
-/* Buttons with restrained lift */
-.primary-btn,
-.secondary-btn,
-.telegram-btn,
-.top-button,
-.nav-button{
-    position:relative;
-    overflow:hidden;
-}
-.primary-btn::before,
-.secondary-btn::before,
-.telegram-btn::before,
-.top-button::before,
-.nav-button::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    transform:translateX(-110%);
-    background:linear-gradient(110deg,transparent 20%,rgba(255,255,255,.38) 50%,transparent 80%);
-    transition:transform .65s var(--ease);
-}
-.primary-btn:hover::before,
-.secondary-btn:hover::before,
-.telegram-btn:hover::before,
-.top-button:hover::before,
-.nav-button:hover::before{
-    transform:translateX(110%);
-}
-
-/* Cards: glass + depth */
-.about-card,
-.skill-card,
-.interest-card,
-.panel,
-.emoji-box,
-.travel-main,
-.travel-small{
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
-}
-
-.about-card,
-.skill-card,
-.interest-card,
-.panel{
-    transition:
-        transform .65s var(--ease),
-        box-shadow .65s var(--ease),
-        border-color .4s ease;
-}
-
-.about-card:hover,
-.skill-card:hover,
-.panel:hover{
-    transform:translateY(-7px);
-    box-shadow:0 30px 85px rgba(124,74,101,.12);
-    border-color:rgba(255,255,255,.98);
-}
-
-/* Soft animated highlight inside cards */
-.interest-card::before,
-.about-card::before,
-.skill-card::before,
-.panel::before{
-    content:"";
-    position:absolute;
-    width:170px;
-    height:170px;
-    top:-90px;
-    left:-90px;
-    border-radius:50%;
-    background:radial-gradient(circle,rgba(255,255,255,.75),transparent 68%);
-    opacity:.7;
-    transition:transform .8s var(--ease);
-    pointer-events:none;
-}
-.interest-card:hover::before,
-.about-card:hover::before,
-.skill-card:hover::before,
-.panel:hover::before{
-    transform:translate(65px,65px);
-}
-
-/* Typography rhythm */
-.section-label{
-    opacity:.9;
-}
-.section-title{
-    text-wrap:balance;
-}
-
-/* Contact becomes a stronger final CTA */
-.contact-box{
-    isolation:isolate;
-}
-.contact-box .telegram-btn{
-    box-shadow:0 14px 35px rgba(224,139,184,.20);
-}
-
-/* Better footer */
-footer{
-    background:rgba(255,255,255,.28);
-}
-
-/* Motion */
-@keyframes slowOrbit{
-    from{transform:rotate(0deg) scale(.96)}
-    to{transform:rotate(360deg) scale(1.02)}
-}
-@keyframes slowOrbitReverse{
-    from{transform:rotate(360deg) scale(.98)}
-    to{transform:rotate(0deg) scale(1.04)}
-}
-@keyframes softPulse{
-    0%,100%{box-shadow:0 0 0 0 rgba(227,154,185,0)}
-    50%{box-shadow:0 0 0 9px rgba(227,154,185,.07)}
-}
-
-/* Active section marker */
-.section-label{
-    transition:letter-spacing .4s ease, transform .4s ease;
-}
-.section:hover > .section-inner > .reveal > .section-label{
-    letter-spacing:3.4px;
-}
-
-/* Mobile: remove desktop-only visual weight */
-@media (max-width:850px){
-    .hero::before{
-        width:105vw;
-        height:105vw;
-    }
-    .hero::after{
-        width:75vw;
-        height:75vw;
-    }
-}
-@media (max-width:600px){
-    body::before{opacity:.025}
-    .cursor-glow{display:none}
-    .hero::before,
-    .hero::after{opacity:.5}
-    .about-card:hover,
-    .skill-card:hover,
-    .panel:hover{
-        transform:none;
+    .telegram-btn:hover,
+    .nav-button:hover {
+        transform: none;
     }
 }
 
-/* Accessibility */
-@media (prefers-reduced-motion:reduce){
-    *,
-    *::before,
-    *::after{
-        animation-duration:.001ms !important;
-        animation-iteration-count:1 !important;
-        scroll-behavior:auto !important;
-        transition-duration:.001ms !important;
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .001ms !important;
     }
+    .reveal { opacity: 1; transform: none; filter: none; }
+    .hero-title .line > span { opacity: 1; transform: none; }
 }
 
 </style>
-
-
-<style id="mahbuba-ultra-upgrade">
-:root{
-  --u-ink:#241f25;
-  --u-muted:#7d737c;
-  --u-rose:#d982a8;
-  --u-lilac:#9b82b8;
-  --u-cream:#fffafc;
-  --u-glass:rgba(255,255,255,.62);
-  --u-border:rgba(255,255,255,.82);
-}
-
-/* Premium grain + atmospheric mesh */
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  z-index:-8;
-  pointer-events:none;
-  opacity:.22;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.13'/%3E%3C/svg%3E");
-  mix-blend-mode:multiply;
-}
-body::after{
-  content:"";
-  position:fixed;
-  inset:0;
-  z-index:-9;
-  pointer-events:none;
-  background:
-    radial-gradient(700px 420px at 8% 12%,rgba(244,192,215,.22),transparent 70%),
-    radial-gradient(650px 460px at 92% 28%,rgba(208,190,231,.20),transparent 68%),
-    radial-gradient(520px 360px at 50% 92%,rgba(250,213,228,.20),transparent 70%);
-}
-
-/* Refined navbar */
-.navbar{
-  border-color:rgba(255,255,255,.78)!important;
-  box-shadow:0 18px 55px rgba(103,68,89,.10), inset 0 1px 0 rgba(255,255,255,.9)!important;
-}
-.navbar::after{
-  content:"";
-  position:absolute;
-  left:8%;
-  right:8%;
-  bottom:-1px;
-  height:1px;
-  background:linear-gradient(90deg,transparent,rgba(216,130,168,.45),transparent);
-  opacity:.7;
-}
-.nav-links a::after{
-  content:"";
-  position:absolute;
-  left:50%;
-  bottom:-7px;
-  width:0;
-  height:1px;
-  transform:translateX(-50%);
-  background:linear-gradient(90deg,var(--u-rose),var(--u-lilac));
-  transition:width .35s ease;
-}
-.nav-links a:hover::after{width:70%;}
-
-/* Hero: editorial glow + floating glass coordinates */
-.hero::before,
-.hero::after{
-  content:"";
-  position:absolute;
-  border:1px solid rgba(207,139,171,.13);
-  border-radius:50%;
-  pointer-events:none;
-}
-.hero::before{
-  width:min(58vw,700px);
-  height:min(58vw,700px);
-  right:-18%;
-  top:14%;
-  animation:uOrbit 26s linear infinite;
-}
-.hero::after{
-  width:min(34vw,420px);
-  height:min(34vw,420px);
-  left:-12%;
-  bottom:4%;
-  border-style:dashed;
-  animation:uOrbitReverse 32s linear infinite;
-}
-.hero-title{
-  text-shadow:0 18px 60px rgba(151,92,119,.08);
-}
-.hero-title .pink{
-  background:linear-gradient(120deg,#d57d9f,#eeaec7 48%,#b58ac4);
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-}
-.mini-label{
-  box-shadow:0 12px 35px rgba(188,116,150,.08);
-}
-
-/* Make cards feel like layered glass objects */
-.about-card,.skill-card,.interest-card,.emoji-box,.travel-main,.travel-small{
-  box-shadow:
-    0 28px 90px rgba(119,73,101,.09),
-    inset 0 1px 0 rgba(255,255,255,.9);
-}
-.about-card,.skill-card,.interest-card{
-  transition:
-    transform .55s cubic-bezier(.16,1,.3,1),
-    box-shadow .55s ease,
-    border-color .4s ease;
-}
-.about-card:hover,.skill-card:hover{
-  transform:translateY(-8px);
-  box-shadow:
-    0 35px 100px rgba(119,73,101,.14),
-    inset 0 1px 0 rgba(255,255,255,.95);
-  border-color:rgba(222,156,185,.25);
-}
-
-/* Elegant shine that travels once on hover */
-.about-card::marker{display:none}
-.about-card,.skill-card,.interest-card,.travel-main,.travel-small,.emoji-box{
-  isolation:isolate;
-}
-.about-card::after,
-.skill-card::after,
-.interest-card::after,
-.travel-main::after,
-.travel-small::after{
-  content:"";
-  position:absolute;
-  inset:-30%;
-  z-index:0;
-  pointer-events:none;
-  background:linear-gradient(115deg,transparent 38%,rgba(255,255,255,.32) 50%,transparent 62%);
-  transform:translateX(-70%) rotate(7deg);
-  transition:transform 1s cubic-bezier(.16,1,.3,1);
-}
-.about-card:hover::after,
-.skill-card:hover::after,
-.interest-card:hover::after,
-.travel-main:hover::after,
-.travel-small:hover::after{
-  transform:translateX(70%) rotate(7deg);
-}
-
-/* Decorative section marker */
-.section-label{
-  position:relative;
-}
-.section-label::after{
-  content:"";
-  width:7px;
-  height:7px;
-  border:1px solid rgba(216,130,168,.65);
-  border-radius:50%;
-  animation:uPulse 2.8s ease-in-out infinite;
-}
-
-/* Timeline becomes more interactive */
-.timeline-item{
-  position:relative;
-  overflow:hidden;
-}
-.timeline-item::before{
-  content:"";
-  position:absolute;
-  left:0;
-  top:0;
-  bottom:0;
-  width:2px;
-  background:linear-gradient(180deg,transparent,var(--u-rose),transparent);
-  transform:scaleY(0);
-  transform-origin:center;
-  transition:transform .45s ease;
-}
-.timeline-item:hover::before{transform:scaleY(1);}
-
-/* Telegram CTA gets a premium signal */
-a[href*="t.me/khamzeyva9"]{
-  position:relative;
-  overflow:hidden;
-}
-a[href*="t.me/khamzeyva9"]::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.24) 50%,transparent 70%);
-  transform:translateX(-120%);
-  transition:transform .8s ease;
-}
-a[href*="t.me/khamzeyva9"]:hover::before{transform:translateX(120%);}
-
-/* Scroll reveal refinement */
-.reveal,.fade-in,.animate-on-scroll{
-  will-change:transform,opacity;
-}
-
-/* Floating micro-particles created by JS */
-.u-particle{
-  position:fixed;
-  width:3px;
-  height:3px;
-  border-radius:50%;
-  background:rgba(211,128,166,.45);
-  pointer-events:none;
-  z-index:-2;
-  filter:blur(.2px);
-  animation:uParticleFloat linear infinite;
-}
-@keyframes uParticleFloat{
-  from{transform:translate3d(0,18px,0);opacity:0}
-  15%{opacity:.65}
-  75%{opacity:.35}
-  to{transform:translate3d(22px,-120px,0);opacity:0}
-}
-@keyframes uOrbit{to{transform:rotate(360deg)}}
-@keyframes uOrbitReverse{to{transform:rotate(-360deg)}}
-@keyframes uPulse{
-  0%,100%{transform:scale(.75);opacity:.45}
-  50%{transform:scale(1.25);opacity:1}
-}
-
-/* Mobile polish */
-@media (max-width:760px){
-  .navbar{top:10px;width:calc(100% - 18px)}
-  .nav-links{gap:12px}
-  .nav-links a{font-size:9px}
-  .nav-button{padding:9px 12px}
-  .hero{padding-top:130px}
-  .hero-title{letter-spacing:-3px}
-  .section-title{letter-spacing:-2.5px}
-  .about-card,.about-text-card,.skill-card{padding:28px}
-  .about-card,.about-text-card{min-height:420px}
-  .travel-main,.travel-small{min-height:400px}
-}
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{
-    animation-duration:.01ms!important;
-    animation-iteration-count:1!important;
-    scroll-behavior:auto!important;
-    transition-duration:.01ms!important;
-  }
-}
-</style>
-
 </head>
-
 
 <body>
 
-
 <!-- =========================================================
-     BACKGROUND
+     PRELOADER
 ========================================================= -->
-
-<div class="background">
-
-    <div class="blob one"></div>
-    <div class="blob two"></div>
-    <div class="blob three"></div>
-
+<div class="preloader" id="preloader">
+    <div class="preloader-inner">
+        <div class="preloader-mark">M</div>
+        <div class="preloader-name">Mahbuba</div>
+        <div class="preloader-bar"></div>
+    </div>
 </div>
 
+<!-- =========================================================
+     READING PROGRESS
+========================================================= -->
+<div class="reading-progress" id="readingProgress"></div>
 
-<div class="emoji-float emoji-1">🥰</div>
-<div class="emoji-float emoji-2">💜</div>
-<div class="emoji-float emoji-3">😊</div>
-<div class="emoji-float emoji-4">😂</div>
+<!-- =========================================================
+     CUSTOM CURSOR
+========================================================= -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 
+<!-- =========================================================
+     AURORA BACKGROUND
+========================================================= -->
+<div class="aurora" aria-hidden="true">
+    <div class="aurora-blob b1"></div>
+    <div class="aurora-blob b2"></div>
+    <div class="aurora-blob b3"></div>
+    <div class="aurora-blob b4"></div>
+</div>
+
+<!-- =========================================================
+     FLOATING EMOJIS
+========================================================= -->
+<div class="emoji-float emoji-1" aria-hidden="true">🥰</div>
+<div class="emoji-float emoji-2" aria-hidden="true">💜</div>
+<div class="emoji-float emoji-3" aria-hidden="true">😊</div>
+<div class="emoji-float emoji-4" aria-hidden="true">😂</div>
 
 <!-- =========================================================
      NAVBAR
 ========================================================= -->
-
-<nav class="navbar">
-
+<nav class="navbar" id="navbar">
     <a href="#home" class="logo">
-
-        <span class="logo-mark">
-            M
-        </span>
-
+        <span class="logo-mark">M</span>
         Mahbuba
-
     </a>
-
 
     <div class="nav-links">
-
-        <a href="#about">
-            Men haqimda
-        </a>
-
-        <a href="#skills">
-            Kasbim
-        </a>
-
-        <a href="#interests">
-            Qiziqishlar
-        </a>
-
-        <a href="#travel">
-            Sayohat
-        </a>
-
-        <a href="#history">
-            Tarix
-        </a>
-
+        <a href="#about">Men haqimda</a>
+        <a href="#skills">Kasbim</a>
+        <a href="#interests">Qiziqishlar</a>
+        <a href="#travel">Sayohat</a>
+        <a href="#history">Tarix</a>
     </div>
 
-
-    <a href="#contact" class="nav-button">
-
-        Bog‘lanish
-
-    </a>
-
+    <a href="#contact" class="nav-button">Bog‘lanish</a>
 </nav>
 
+<main id="home">
 
 <!-- =========================================================
      HERO
 ========================================================= -->
-
-<main id="home">
-
 <section class="hero">
-
     <div class="hero-inner">
 
-        <div class="hero-emoji one">
-            🥰
-        </div>
-
-        <div class="hero-emoji two">
-            🤭
-        </div>
-
+        <div class="hero-emoji one" aria-hidden="true">🥰</div>
+        <div class="hero-emoji two" aria-hidden="true">🤭</div>
 
         <div class="mini-label">
-
             <span class="mini-dot"></span>
-
             mening kichik dunyom
-
         </div>
 
-
         <h1 class="hero-title">
-
-            Salom,
-
-            <span class="pink">
-                men
-            </span>
-
-            <br>
-
-            <span class="purple">
-                Mahbubaman.
-            </span>
-
+            <span class="line"><span>Salom, <span class="pink">men</span></span></span>
+            <span class="line"><span class="purple">Mahbubaman.</span></span>
         </h1>
 
-
         <p class="hero-text">
-
             Arab tili o‘qituvchisi, tillar ishqibozi va
             yangi bilimlarni o‘rganishni sevuvchi.
             Men haqimda, qiziqishlarim va kasbimni
             shu sahifada jamladim.
-
         </p>
 
-
         <div class="hero-actions">
-
-            <a
-                href="#about"
-                class="primary-btn"
-            >
-
-                Men haqimda
-
-                <span>
-                    ↓
-                </span>
-
+            <a href="#about" class="primary-btn">
+                Men haqimda <span>↓</span>
             </a>
-
-
-            <a
-                href="#contact"
-                class="secondary-btn"
-            >
-
-                Telegram
-
-                <span>
-                    ✦
-                </span>
-
+            <a href="#contact" class="secondary-btn">
+                Telegram <span>✦</span>
             </a>
-
         </div>
 
     </div>
 
-
-    <div class="scroll-hint">
-
+    <div class="scroll-hint" aria-hidden="true">
         pastga
-
         <span class="scroll-line"></span>
-
     </div>
-
 </section>
 
+<!-- =========================================================
+     MARQUEE
+========================================================= -->
+<div class="marquee-section" aria-hidden="true">
+    <div class="marquee">
+        <span class="marquee-item"><span class="dot"></span>Arab tili <em>o‘qituvchisi</em></span>
+        <span class="marquee-item"><span class="dot"></span>B2 <em>sertifikat</em></span>
+        <span class="marquee-item"><span class="dot"></span>Tillar <em>ishqibozi</em></span>
+        <span class="marquee-item"><span class="dot"></span>Sayohat <em>va</em> tarix</span>
+        <span class="marquee-item"><span class="dot"></span>Yangi <em>bilimlar</em></span>
+        <span class="marquee-item"><span class="dot"></span>Arab tili <em>o‘qituvchisi</em></span>
+        <span class="marquee-item"><span class="dot"></span>B2 <em>sertifikat</em></span>
+        <span class="marquee-item"><span class="dot"></span>Tillar <em>ishqibozi</em></span>
+        <span class="marquee-item"><span class="dot"></span>Sayohat <em>va</em> tarix</span>
+        <span class="marquee-item"><span class="dot"></span>Yangi <em>bilimlar</em></span>
+    </div>
+</div>
 
 <!-- =========================================================
      ABOUT
 ========================================================= -->
-
 <section class="section" id="about">
+    <div class="section-inner">
 
-<div class="section-inner">
-
-    <div class="reveal">
-
-        <div class="section-label">
-            01 — Men haqimda
+        <div class="reveal">
+            <div class="section-label">01 — Men haqimda</div>
+            <h2 class="section-title">
+                O‘zimni bir<br>
+                <em>jumlaga</em> sig‘dira olmayman.
+            </h2>
         </div>
 
-        <h2 class="section-title">
+        <div class="about-grid">
 
-            O‘zimni bir<br>
+            <div class="about-card main reveal">
+                <div class="about-top">
+                    <div class="about-number">MAHBUBA / 01</div>
+                    <div class="about-big-emoji">😊</div>
+                </div>
 
-            <em>jumlaga</em> sig‘dira olmayman.
+                <div class="about-bottom">
+                    <div class="about-name">Mahbuba</div>
+                    <div class="about-role">Arab tili o‘qituvchisi · Tillar · Sayohat</div>
+                    <div class="about-tags">
+                        <span>Qiziquvchan</span>
+                        <span>Izlanuvchan</span>
+                        <span>O‘qituvchi</span>
+                        <span>B2 sertifikat</span>
+                    </div>
+                </div>
+            </div>
 
-        </h2>
+            <div class="about-text-card reveal">
+                <div class="about-quote">
+                    “Men uchun eng qiziq narsa —
+                    <span>yangi narsani o‘rganish.</span>”
+                </div>
+                <p class="about-description">
+                    Har doim nimadir o‘rganish,
+                    yangi joylar haqida bilish,
+                    tillarga qiziqish va tarixdagi
+                    qiziqarli voqealarni o‘qish menga yoqadi.
+                    Menimcha, inson o‘zini doimo
+                    rivojlantirib borishi kerak.
+                </p>
+            </div>
 
+        </div>
     </div>
-
-
-    <div class="about-grid">
-
-
-        <div class="about-card main reveal">
-
-            <div class="about-top">
-
-                <div class="about-number">
-                    MAHBUBA / 01
-                </div>
-
-                <div class="about-big-emoji">
-                    😊
-                </div>
-
-            </div>
-
-
-            <div class="about-bottom">
-
-                <div class="about-name">
-                    Mahbuba
-                </div>
-
-                <div class="about-role">
-                    Arab tili o‘qituvchisi · Tillar · Sayohat
-                </div>
-
-
-                <div class="about-tags">
-
-                    <span>
-                        Qiziquvchan
-                    </span>
-
-                    <span>
-                        Izlanuvchan
-                    </span>
-
-                    <span>
-                        O‘qituvchi
-                    </span>
-
-                    <span>
-                        B2 sertifikat
-                    </span>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="about-text-card reveal">
-
-            <div class="about-quote">
-
-                “Men uchun eng qiziq narsa —
-                <span>
-                    yangi narsani o‘rganish.
-                </span>”
-
-            </div>
-
-
-            <p class="about-description">
-
-                Har doim nimadir o‘rganish,
-                yangi joylar haqida bilish,
-                tillarga qiziqish va tarixdagi
-                qiziqarli voqealarni o‘qish menga yoqadi.
-
-                Menimcha, inson o‘zini doimo
-                rivojlantirib borishi kerak.
-
-            </p>
-
-        </div>
-
-
-    </div>
-
-</div>
-
 </section>
-
 
 <!-- =========================================================
-     SKILLS / CERTIFICATE  (YANGI BO‘LIM)
+     SKILLS
 ========================================================= -->
-
 <section class="section" id="skills">
+    <div class="section-inner">
 
-<div class="section-inner">
-
-    <div class="reveal">
-
-        <div class="section-label">
-            02 — Kasbim va sertifikatlar
+        <div class="reveal">
+            <div class="section-label">02 — Kasbim va sertifikatlar</div>
+            <h2 class="section-title">
+                Arab tili<br>
+                <em>o‘qituvchisi.</em>
+            </h2>
         </div>
 
-        <h2 class="section-title">
+        <div class="skills-grid">
 
-            Arab tili<br>
+            <div class="skill-card highlight reveal">
+                <div class="big-emoji">📚</div>
+                <div class="skill-badge">✨ Asosiy kasbim</div>
+                <h3>Arab tili<br>o‘qituvchisi</h3>
+                <p>
+                    Arab tilini o‘rgatish — mening sevimli
+                    ishim. O‘quvchilarimga nafaqat til,
+                    balki arab madaniyati va tarixini ham
+                    tanishtirishga harakat qilaman.
+                    Har bir dars — yangi kashfiyot.
+                </p>
+            </div>
 
-            <em>o‘qituvchisi.</em>
+            <div class="skill-card dark reveal">
+                <div class="skill-badge">🎓 Sertifikatlar</div>
+                <h3>Bilim va<br>darajalar</h3>
 
-        </h2>
+                <div class="cert-list">
+                    <div class="cert-item">
+                        <div class="cert-icon">📜</div>
+                        <div class="cert-text">
+                            <strong>B2 sertifikat</strong>
+                            Arab tili bo‘yicha B2 daraja
+                        </div>
+                    </div>
+                    <div class="cert-item">
+                        <div class="cert-icon">🗣️</div>
+                        <div class="cert-text">
+                            <strong>Arab tili</strong>
+                            O‘qitish va amaliyot tajribasi
+                        </div>
+                    </div>
+                    <div class="cert-item">
+                        <div class="cert-icon">🌍</div>
+                        <div class="cert-text">
+                            <strong>Tillar</strong>
+                            Yangi tillarni o‘rganish ishqibozi
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+        </div>
     </div>
-
-
-    <div class="skills-grid">
-
-        <div class="skill-card highlight reveal">
-
-            <div class="big-emoji">📚</div>
-
-            <div class="skill-badge">
-                ✨ Asosiy kasbim
-            </div>
-
-            <h3>
-                Arab tili<br>o‘qituvchisi
-            </h3>
-
-            <p>
-
-                Arab tilini o‘rgatish — mening sevimli
-                ishim. O‘quvchilarimga nafaqat til,
-                balki arab madaniyati va tarixini ham
-                tanishtirishga harakat qilaman.
-                Har bir dars — yangi kashfiyot.
-
-            </p>
-
-        </div>
-
-
-        <div class="skill-card dark reveal">
-
-            <div class="skill-badge">
-                🎓 Sertifikatlar
-            </div>
-
-            <h3>
-                Bilim va<br>darajalar
-            </h3>
-
-            <div class="cert-list">
-
-                <div class="cert-item">
-
-                    <div class="cert-icon">
-                        📜
-                    </div>
-
-                    <div class="cert-text">
-                        <strong>B2 sertifikat</strong>
-                        Arab tili bo‘yicha B2 daraja
-                    </div>
-
-                </div>
-
-                <div class="cert-item">
-
-                    <div class="cert-icon">
-                        🗣️
-                    </div>
-
-                    <div class="cert-text">
-                        <strong>Arab tili</strong>
-                        O‘qitish va amaliyot tajribasi
-                    </div>
-
-                </div>
-
-                <div class="cert-item">
-
-                    <div class="cert-icon">
-                        🌍
-                    </div>
-
-                    <div class="cert-text">
-                        <strong>Tillar</strong>
-                        Yangi tillarni o‘rganish ishqibozi
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
 </section>
-
 
 <!-- =========================================================
      INTERESTS
 ========================================================= -->
+<section class="section interests" id="interests">
+    <div class="section-inner">
 
-<section
-    class="section interests"
-    id="interests"
->
-
-<div class="section-inner">
-
-    <div class="reveal">
-
-        <div class="section-label">
-            03 — Qiziqishlarim
+        <div class="reveal">
+            <div class="section-label">03 — Qiziqishlarim</div>
+            <h2 class="section-title">
+                Menga yoqadigan<br>
+                <em>dunyolar.</em>
+            </h2>
         </div>
 
-        <h2 class="section-title">
+        <div class="interest-grid">
 
-            Menga yoqadigan<br>
+            <article class="interest-card reveal">
+                <div class="interest-number">01 / TILLAR</div>
+                <div class="interest-emoji">📚</div>
+                <div class="interest-circle"></div>
+                <div class="interest-content">
+                    <h3>Tillar</h3>
+                    <p>
+                        Yangi til o‘rganish,
+                        yangi so‘zlarni bilish
+                        va boshqa madaniyatlarni
+                        tushunish menga juda qiziq.
+                        Arab tili — eng sevimli yo‘nalishim.
+                    </p>
+                </div>
+            </article>
 
-            <em>dunyolar.</em>
+            <article class="interest-card reveal">
+                <div class="interest-number">02 / SAYOHAT</div>
+                <div class="interest-emoji">✈️</div>
+                <div class="interest-circle"></div>
+                <div class="interest-content">
+                    <h3>Sayohat</h3>
+                    <p>
+                        Yangi shaharlar,
+                        yangi mamlakatlar,
+                        yangi joylar va
+                        yangi taassurotlar.
+                        Har bir sayohat — yangi hikoya.
+                    </p>
+                </div>
+            </article>
 
-        </h2>
+            <article class="interest-card reveal">
+                <div class="interest-number">03 / TARIX</div>
+                <div class="interest-emoji">🏛️</div>
+                <div class="interest-circle"></div>
+                <div class="interest-content">
+                    <h3>Tarix</h3>
+                    <p>
+                        O‘tmishda nimalar bo‘lganini,
+                        buyuk insonlar va
+                        qadimgi sivilizatsiyalar
+                        tarixini o‘rganish yoqadi.
+                    </p>
+                </div>
+            </article>
 
+        </div>
     </div>
-
-
-    <div class="interest-grid">
-
-
-        <article class="interest-card reveal">
-
-            <div class="interest-number">
-                01 / TILLAR
-            </div>
-
-            <div class="interest-emoji">
-                📚
-            </div>
-
-            <div class="interest-circle"></div>
-
-            <div class="interest-content">
-
-                <h3>
-                    Tillar
-                </h3>
-
-                <p>
-
-                    Yangi til o‘rganish,
-                    yangi so‘zlarni bilish
-                    va boshqa madaniyatlarni
-                    tushunish menga juda qiziq.
-                    Arab tili — eng sevimli yo‘nalishim.
-
-                </p>
-
-            </div>
-
-        </article>
-
-
-        <article class="interest-card reveal">
-
-            <div class="interest-number">
-                02 / SAYOHAT
-            </div>
-
-            <div class="interest-emoji">
-                ✈️
-            </div>
-
-            <div class="interest-circle"></div>
-
-            <div class="interest-content">
-
-                <h3>
-                    Sayohat
-                </h3>
-
-                <p>
-
-                    Yangi shaharlar,
-                    yangi mamlakatlar,
-                    yangi joylar va
-                    yangi taassurotlar.
-                    Har bir sayohat — yangi hikoya.
-
-                </p>
-
-            </div>
-
-        </article>
-
-
-        <article class="interest-card reveal">
-
-            <div class="interest-number">
-                03 / TARIX
-            </div>
-
-            <div class="interest-emoji">
-                🏛️
-            </div>
-
-            <div class="interest-circle"></div>
-
-            <div class="interest-content">
-
-                <h3>
-                    Tarix
-                </h3>
-
-                <p>
-
-                    O‘tmishda nimalar bo‘lganini,
-                    buyuk insonlar va
-                    qadimgi sivilizatsiyalar
-                    tarixini o‘rganish yoqadi.
-
-                </p>
-
-            </div>
-
-        </article>
-
-
-    </div>
-
-</div>
-
 </section>
-
 
 <!-- =========================================================
      EMOJI
 ========================================================= -->
-
 <section class="section emoji-section">
+    <div class="section-inner">
 
-<div class="section-inner">
-
-    <div class="reveal">
-
-        <div class="section-label">
-            04 — Mening kayfiyatim
+        <div class="reveal">
+            <div class="section-label">04 — Mening kayfiyatim</div>
+            <h2 class="section-title">
+                Ba'zan bitta emoji<br>
+                <em>hammasini aytadi.</em>
+            </h2>
         </div>
 
-        <h2 class="section-title">
+        <div class="emoji-box reveal">
+            <h3>Bugungi <em>kayfiyatim</em></h3>
+            <p>
+                Menga yoqadigan emojilardan birini
+                bosib ko‘ring. Har birining o‘z
+                kayfiyati bor.
+            </p>
 
-            Ba'zan bitta emoji<br>
+            <div class="emoji-list">
+                <button class="emoji-button" data-text="Bugun kayfiyatim yaxshi 😊">😊</button>
+                <button class="emoji-button" data-text="Bugun biroz kulgili kayfiyatdaman 😂">😂</button>
+                <button class="emoji-button" data-text="Shunchaki xursandman 🥰">🥰</button>
+                <button class="emoji-button" data-text="Hammasi joyida 😌">😌</button>
+                <button class="emoji-button" data-text="Bugun biroz hayronman 😅">😅</button>
+                <button class="emoji-button" data-text="Kayfiyat: 😎">😎</button>
+                <button class="emoji-button" data-text="Ba'zan shunchaki 🥹">🥹</button>
+                <button class="emoji-button" data-text="Yangi narsalarni o‘rganishga tayyorman 🤭">🤭</button>
+                <button class="emoji-button" data-text="Biroz o‘ychanman 🤍">🤍</button>
+                <button class="emoji-button" data-text="Menga binafsha rang yoqadi 💜">💜</button>
+            </div>
 
-            <em>hammasini aytadi.</em>
-
-        </h2>
-
-    </div>
-
-
-    <div class="emoji-box reveal">
-
-        <h3>
-
-            Bugungi <em>kayfiyatim</em>
-
-        </h3>
-
-        <p>
-
-            Menga yoqadigan emojilardan birini
-            bosib ko‘ring. Har birining o‘z
-            kayfiyati bor.
-
-        </p>
-
-
-        <div class="emoji-list">
-
-            <button
-                class="emoji-button"
-                data-text="Bugun kayfiyatim yaxshi 😊"
-            >
-                😊
-            </button>
-
-            <button
-                class="emoji-button"
-                data-text="Bugun biroz kulgili kayfiyatdaman 😂"
-            >
-                😂
-            </button>
-
-            <button
-                class="emoji-button"
-                data-text="Shunchaki xursandman 🥰"
-            >
-                🥰
-            </button>
-
-            <button
-                class="emoji-button"
-                data-text="Hammasi joyida 😌"
-            >
-                😌
-            </button>
-
-            <button
-                class="emoji-button"
-                data-text="Bugun biroz hayronman 😅"
-            >
-                😅
-            </button>
-
-            <button
-                class="emoji-button"
-                data-text="Kayfiyat: 😎"
-            >
-                😎
-            </button>
-
-            <button
-                class="emoji-button"
-                data-text="Ba'zan shunchaki 🥹"
-            >
-                🥹
-            </button>
-
-            <button
-                class="emoji-button"
-                data-text="Yangi narsalarni o‘rganishga tayyorman 🤭"
-            >
-                🤭
-            </button>
-
-            <button
-                class="emoji-button"
-                data-text="Biroz o‘ychanman 🤍"
-            >
-                🤍
-            </button>
-
-            <button
-                class="emoji-button"
-                data-text="Menga binafsha rang yoqadi 💜"
-            >
-                💜
-            </button>
-
-        </div>
-
-
-        <div
-            class="emoji-result"
-            id="emojiResult"
-        >
-            Emoji tanlang...
+            <div class="emoji-result" id="emojiResult">Emoji tanlang...</div>
         </div>
 
     </div>
-
-</div>
-
 </section>
-
 
 <!-- =========================================================
      STATEMENT
 ========================================================= -->
-
 <section class="section statement">
-
-    <div class="statement-orbit"></div>
+    <div class="statement-orbit" aria-hidden="true"></div>
 
     <div class="statement-content reveal">
-
-        <div class="statement-small">
-            mening qarashim
-        </div>
-
+        <div class="statement-small">mening qarashim</div>
         <div class="statement-big">
-
-            Har kuni
-
-            <em>
-                yangi narsa
-            </em>
-
+            Har kuni<br>
+            <em>yangi narsa</em><br>
             o‘rganish.
-
         </div>
-
         <p class="statement-description">
-
             Menimcha, hayotdagi eng qiziq narsalardan biri —
             hali bilmagan narsangni bilib olish.
             Shu sababli qiziqishlarim ham vaqt o‘tishi
             bilan o‘zgarib, kengayib boradi.
-
         </p>
-
     </div>
-
 </section>
-
 
 <!-- =========================================================
      TRAVEL
 ========================================================= -->
+<section class="section" id="travel">
+    <div class="section-inner">
 
-<section
-    class="section"
-    id="travel"
->
-
-<div class="section-inner">
-
-    <div class="reveal">
-
-        <div class="section-label">
-            05 — Sayohat
+        <div class="reveal">
+            <div class="section-label">05 — Sayohat</div>
+            <h2 class="section-title">
+                Dunyo katta.<br>
+                <em>Ko‘rishga joy ko‘p.</em>
+            </h2>
         </div>
 
-        <h2 class="section-title">
+        <div class="travel-grid">
 
-            Dunyo katta.<br>
-
-            <em>Ko‘rishga joy ko‘p.</em>
-
-        </h2>
-
-    </div>
-
-
-    <div class="travel-grid">
-
-
-        <div class="travel-main reveal">
-
-            <div class="travel-main-content">
-
-                <div class="section-label">
-                    Sayohat
+            <div class="travel-main reveal">
+                <div class="travel-main-content">
+                    <div class="section-label">Sayohat</div>
+                    <h3>Ko‘rish.</h3>
+                    <p>
+                        Turli joylarni ko‘rish,
+                        boshqa xalqlar va madaniyatlar
+                        bilan tanishish, yangi
+                        taassurotlar olishni xohlayman.
+                        Ayniqsa arab mamlakatlariga
+                        sayohat qilishni orzu qilaman.
+                    </p>
                 </div>
+            </div>
 
-                <h3>
-                    Ko‘rish.
-                </h3>
-
-                <p>
-
-                    Turli joylarni ko‘rish,
-                    boshqa xalqlar va madaniyatlar
-                    bilan tanishish, yangi
-                    taassurotlar olishni xohlayman.
-                    Ayniqsa arab mamlakatlariga
-                    sayohat qilishni orzu qilaman.
-
-                </p>
-
+            <div class="travel-small reveal">
+                <div class="travel-small-content">
+                    <div class="section-label">Mening rejam</div>
+                    <h3>Ko‘proq<br><span>kashf qilish.</span></h3>
+                    <p>Har bir sayohat — yangi hikoya.</p>
+                </div>
             </div>
 
         </div>
-
-
-        <div class="travel-small reveal">
-
-            <div class="travel-small-content">
-
-                <div class="section-label">
-                    Mening rejam
-                </div>
-
-                <h3>
-
-                    Ko‘proq<br>
-
-                    <span>
-                        kashf qilish.
-                    </span>
-
-                </h3>
-
-                <p>
-
-                    Har bir sayohat —
-                    yangi hikoya.
-
-                </p>
-
-            </div>
-
-        </div>
-
-
     </div>
-
-</div>
-
 </section>
-
 
 <!-- =========================================================
      HISTORY
 ========================================================= -->
+<section class="section" id="history">
+    <div class="section-inner">
 
-<section
-    class="section"
-    id="history"
->
-
-<div class="section-inner">
-
-    <div class="reveal">
-
-        <div class="section-label">
-            06 — Tarix
+        <div class="reveal">
+            <div class="section-label">06 — Tarix</div>
+            <h2 class="section-title">
+                O‘tmishdagi<br>
+                <em>hikoyalar.</em>
+            </h2>
         </div>
 
-        <h2 class="section-title">
-
-            O‘tmishdagi<br>
-
-            <em>hikoyalar.</em>
-
-        </h2>
+        <div class="timeline">
+            <div class="timeline-item reveal">
+                <div class="timeline-number">01</div>
+                <div class="timeline-title">Qadimgi sivilizatsiyalar</div>
+                <div class="timeline-text">Madaniyat</div>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="timeline-number">02</div>
+                <div class="timeline-title">Buyuk insonlar</div>
+                <div class="timeline-text">Shaxslar</div>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="timeline-number">03</div>
+                <div class="timeline-title">Tarixiy shaharlar</div>
+                <div class="timeline-text">Joylar</div>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="timeline-number">04</div>
+                <div class="timeline-title">O‘tmishdan bugungacha</div>
+                <div class="timeline-text">Hikoyalar</div>
+            </div>
+        </div>
 
     </div>
-
-
-    <div class="timeline">
-
-
-        <div class="timeline-item reveal">
-
-            <div class="timeline-number">
-                01
-            </div>
-
-            <div class="timeline-title">
-                Qadimgi sivilizatsiyalar
-            </div>
-
-            <div class="timeline-text">
-                Madaniyat
-            </div>
-
-        </div>
-
-
-        <div class="timeline-item reveal">
-
-            <div class="timeline-number">
-                02
-            </div>
-
-            <div class="timeline-title">
-                Buyuk insonlar
-            </div>
-
-            <div class="timeline-text">
-                Shaxslar
-            </div>
-
-        </div>
-
-
-        <div class="timeline-item reveal">
-
-            <div class="timeline-number">
-                03
-            </div>
-
-            <div class="timeline-title">
-                Tarixiy shaharlar
-            </div>
-
-            <div class="timeline-text">
-                Joylar
-            </div>
-
-        </div>
-
-
-        <div class="timeline-item reveal">
-
-            <div class="timeline-number">
-                04
-            </div>
-
-            <div class="timeline-title">
-                O‘tmishdan bugungacha
-            </div>
-
-            <div class="timeline-text">
-                Hikoyalar
-            </div>
-
-        </div>
-
-
-    </div>
-
-</div>
-
 </section>
-
 
 <!-- =========================================================
      PERSONAL
 ========================================================= -->
-
 <section class="section">
+    <div class="section-inner">
 
-<div class="section-inner">
-
-    <div class="reveal">
-
-        <div class="section-label">
-            07 — Men qandayman?
+        <div class="reveal">
+            <div class="section-label">07 — Men qandayman?</div>
+            <h2 class="section-title">
+                Bir oz <em>men</em> haqida.
+            </h2>
         </div>
 
-        <h2 class="section-title">
+        <div class="personal-panel">
 
-            Bir oz <em>men</em> haqida.
+            <div class="panel reveal">
+                <h3>Menga yoqadi</h3>
+                <p>
+                    Yangi narsalarni o‘rganish,
+                    qiziqarli suhbatlar,
+                    sayohat, tillar,
+                    tarix va yaxshi kayfiyat.
+                    Arab tilini o‘rgatish — eng sevimli ishim.
+                </p>
+                <div class="pills">
+                    <span class="pill">Arab tili</span>
+                    <span class="pill">Tillar</span>
+                    <span class="pill">Sayohat</span>
+                    <span class="pill">Tarix</span>
+                    <span class="pill">Kitoblar</span>
+                    <span class="pill">Yangi bilimlar</span>
+                </div>
+            </div>
 
-        </h2>
-
-    </div>
-
-
-    <div class="personal-panel">
-
-
-        <div class="panel reveal">
-
-            <h3>
-                Menga yoqadi
-            </h3>
-
-            <p>
-
-                Yangi narsalarni o‘rganish,
-                qiziqarli suhbatlar,
-                sayohat, tillar,
-                tarix va yaxshi kayfiyat.
-                Arab tilini o‘rgatish — eng sevimli ishim.
-
-            </p>
-
-
-            <div class="pills">
-
-                <span class="pill">
-                    Arab tili
-                </span>
-
-                <span class="pill">
-                    Tillar
-                </span>
-
-                <span class="pill">
-                    Sayohat
-                </span>
-
-                <span class="pill">
-                    Tarix
-                </span>
-
-                <span class="pill">
-                    Kitoblar
-                </span>
-
-                <span class="pill">
-                    Yangi bilimlar
-                </span>
-
+            <div class="panel dark reveal">
+                <h3>Hozirgi men</h3>
+                <p>
+                    Hali oldinda juda ko‘p narsalar bor.
+                    Shuning uchun hozir o‘rganayotgan
+                    narsalarim va qiziqayotgan
+                    mavzularim men uchun muhim.
+                    O‘quvchilarimga bilim berish — eng katta baxtim.
+                </p>
+                <div class="pills">
+                    <span class="pill">Izlanish</span>
+                    <span class="pill">Rivojlanish</span>
+                    <span class="pill">Tajriba</span>
+                    <span class="pill">Kelajak</span>
+                    <span class="pill">O‘qitish</span>
+                </div>
             </div>
 
         </div>
-
-
-        <div class="panel dark reveal">
-
-            <h3>
-                Hozirgi men
-            </h3>
-
-            <p>
-
-                Hali oldinda juda ko‘p narsalar bor.
-                Shuning uchun hozir o‘rganayotgan
-                narsalarim va qiziqayotgan
-                mavzularim men uchun muhim.
-                O‘quvchilarimga bilim berish — eng katta baxtim.
-
-            </p>
-
-
-            <div class="pills">
-
-                <span class="pill">
-                    Izlanish
-                </span>
-
-                <span class="pill">
-                    Rivojlanish
-                </span>
-
-                <span class="pill">
-                    Tajriba
-                </span>
-
-                <span class="pill">
-                    Kelajak
-                </span>
-
-                <span class="pill">
-                    O‘qitish
-                </span>
-
-            </div>
-
-        </div>
-
-
     </div>
-
-</div>
-
 </section>
-
 
 <!-- =========================================================
-     CONTACT / TELEGRAM  (YANGI BO‘LIM)
+     CONTACT
 ========================================================= -->
-
 <section class="section contact-section" id="contact">
+    <div class="section-inner">
 
-<div class="section-inner">
-
-    <div class="reveal">
-
-        <div class="section-label">
-            08 — Bog‘lanish
+        <div class="reveal">
+            <div class="section-label">08 — Bog‘lanish</div>
+            <h2 class="section-title">
+                Men bilan<br>
+                <em>bog‘laning.</em>
+            </h2>
         </div>
 
-        <h2 class="section-title">
+        <div class="contact-box reveal">
+            <h3>
+                Savollaringiz bormi?<br>
+                <em>Yozing!</em>
+            </h3>
 
-            Men bilan<br>
+            <p>
+                Arab tili darslari, hamkorlik yoki
+                shunchaki tanishish uchun Telegram orqali
+                bemalol yozishingiz mumkin.
+            </p>
 
-            <em>bog‘laning.</em>
-
-        </h2>
-
-    </div>
-
-
-    <div class="contact-box reveal">
-
-        <h3>
-
-            Savollaringiz bormi?<br>
-            <em>Yozing!</em>
-
-        </h3>
-
-        <p>
-
-            Arab tili darslari, hamkorlik yoki
-            shunchaki tanishish uchun Telegram orqali
-            bemalol yozishingiz mumkin.
-
-        </p>
-
-        <a
-            href="https://t.me/khamzeyva9"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="telegram-btn"
-        >
-
-            <span class="tg-icon">✈️</span>
-
-            @khamzeyva9
-
-        </a>
+            <a href="https://t.me/khamzeyva9" target="_blank" rel="noopener noreferrer" class="telegram-btn">
+                <span class="tg-icon">✈️</span>
+                @khamzeyva9
+            </a>
+        </div>
 
     </div>
-
-</div>
-
 </section>
-
 
 <!-- =========================================================
      FINAL
 ========================================================= -->
-
-<section
-    class="section final"
->
-
-<div class="final-content reveal">
-
-    <div class="final-emoji">
-        🥰
+<section class="section final">
+    <div class="final-content reveal">
+        <div class="final-emoji">🥰</div>
+        <h2>
+            Bu faqat<br>
+            <em>boshlanishi.</em>
+        </h2>
+        <p>
+            Men haqimda hamma narsani bitta sahifaga
+            joylab bo‘lmaydi. Balki vaqt o‘tishi bilan
+            bu sahifada yana yangi qiziqishlar,
+            yangi joylar va yangi hikoyalar paydo bo‘lar.
+        </p>
+        <a href="#home" class="top-button">
+            Boshiga qaytish <span>↑</span>
+        </a>
     </div>
-
-    <h2>
-
-        Bu faqat<br>
-
-        <em>boshlanishi.</em>
-
-    </h2>
-
-    <p>
-
-        Men haqimda hamma narsani bitta sahifaga
-        joylab bo‘lmaydi. Balki vaqt o‘tishi bilan
-        bu sahifada yana yangi qiziqishlar,
-        yangi joylar va yangi hikoyalar paydo bo‘lar.
-
-    </p>
-
-
-    <a
-        href="#home"
-        class="top-button"
-    >
-
-        Boshiga qaytish
-
-        ↑
-
-    </a>
-
-</div>
-
 </section>
 
-
 </main>
-
 
 <!-- =========================================================
      FOOTER
 ========================================================= -->
-
 <footer>
-
-    <span>
-        Mahbuba
-    </span>
-
-    <span>
-        Shaxsiy portfolio · Arab tili o‘qituvchisi
-    </span>
-
-    <span>
-        2026
-    </span>
-
+    <span>Mahbuba</span>
+    <span>Shaxsiy portfolio · Arab tili o‘qituvchisi</span>
+    <span>2026</span>
 </footer>
 
-
 <script>
+/* =========================================================
+   PRELOADER
+========================================================= */
+window.addEventListener("load", () => {
+    setTimeout(() => {
+        document.getElementById("preloader").classList.add("done");
+    }, 900);
+});
+
+/* =========================================================
+   CUSTOM CURSOR
+========================================================= */
+(() => {
+    const isFine = window.matchMedia("(pointer: fine)").matches;
+    if (!isFine) return;
+
+    const dot = document.getElementById("cursorDot");
+    const ring = document.getElementById("cursorRing");
+
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let ringX = mouseX;
+    let ringY = mouseY;
+
+    window.addEventListener("pointermove", e => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        dot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+    });
+
+    function animateRing() {
+        ringX += (mouseX - ringX) * 0.18;
+        ringY += (mouseY - ringY) * 0.18;
+        ring.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+        requestAnimationFrame(animateRing);
+    }
+    animateRing();
+
+    document.querySelectorAll("a, button, .emoji-button").forEach(el => {
+        el.addEventListener("pointerenter", () => ring.classList.add("hover"));
+        el.addEventListener("pointerleave", () => ring.classList.remove("hover"));
+    });
+})();
 
 /* =========================================================
    SCROLL REVEAL
 ========================================================= */
+(() => {
+    const revealElements = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("show");
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
 
-const revealElements =
-    document.querySelectorAll(".reveal");
+    revealElements.forEach(el => observer.observe(el));
 
-const observer =
-    new IntersectionObserver(
+    // Stagger children of grids
+    document.querySelectorAll(".about-grid, .skills-grid, .interest-grid, .personal-panel, .timeline, .travel-grid").forEach(group => {
+        [...group.children].forEach((item, i) => {
+            item.style.transitionDelay = `${i * 90}ms`;
+        });
+    });
+})();
 
-        entries => {
+/* =========================================================
+   READING PROGRESS
+========================================================= */
+(() => {
+    const bar = document.getElementById("readingProgress");
+    let ticking = false;
 
-            entries.forEach(entry => {
+    function update() {
+        const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+        const value = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
+        bar.style.width = value + "%";
+        ticking = false;
+    }
 
-                if (entry.isIntersecting) {
-
-                    entry.target.classList.add("show");
-
-                    observer.unobserve(
-                        entry.target
-                    );
-
-                }
-
-            });
-
-        },
-
-        {
-            threshold: .12
+    window.addEventListener("scroll", () => {
+        if (!ticking) {
+            requestAnimationFrame(update);
+            ticking = true;
         }
+    }, { passive: true });
 
-    );
+    update();
+})();
 
+/* =========================================================
+   NAVBAR SCROLL STATE + ACTIVE LINK
+========================================================= */
+(() => {
+    const navbar = document.getElementById("navbar");
+    let ticking = false;
 
-revealElements.forEach(element => {
+    function updateNavbar() {
+        if (window.scrollY > 35) navbar.classList.add("scrolled");
+        else navbar.classList.remove("scrolled");
+        ticking = false;
+    }
 
-    observer.observe(element);
+    window.addEventListener("scroll", () => {
+        if (!ticking) {
+            requestAnimationFrame(updateNavbar);
+            ticking = true;
+        }
+    }, { passive: true });
 
+    updateNavbar();
+
+    // Active section
+    const navItems = [...document.querySelectorAll(".nav-links a")];
+    const targets = navItems
+        .map(a => document.querySelector(a.getAttribute("href")))
+        .filter(Boolean);
+
+    const sectionObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            navItems.forEach(a => a.classList.remove("active"));
+            const active = navItems.find(a => a.getAttribute("href") === "#" + entry.target.id);
+            if (active) active.classList.add("active");
+        });
+    }, { rootMargin: "-40% 0px -55% 0px", threshold: 0 });
+
+    targets.forEach(t => sectionObserver.observe(t));
+})();
+
+/* =========================================================
+   SMOOTH SCROLL
+========================================================= */
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener("click", event => {
+        const id = link.getAttribute("href");
+        if (id === "#") return;
+        const target = document.querySelector(id);
+        if (!target) return;
+        event.preventDefault();
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
 });
-
 
 /* =========================================================
    EMOJI INTERACTION + RAIN
 ========================================================= */
+(() => {
+    const emojiButtons = document.querySelectorAll(".emoji-button");
+    const emojiResult = document.getElementById("emojiResult");
 
-const emojiButtons =
-    document.querySelectorAll(".emoji-button");
+    function createEmojiRain(emoji) {
+        const count = 20;
 
-const emojiResult =
-    document.getElementById("emojiResult");
+        for (let i = 0; i < count; i++) {
+            const el = document.createElement("div");
+            el.className = "emoji-rain";
+            el.textContent = emoji;
 
+            el.style.left = Math.random() * 100 + "vw";
+            el.style.fontSize = (22 + Math.random() * 22) + "px";
 
-function createEmojiRain(emoji) {
-    const count = 18; // not too many, finishes fast
+            const rot = (Math.random() > 0.5 ? 1 : -1) * (40 + Math.random() * 90);
+            el.style.setProperty("--rot", rot + "deg");
 
-    for (let i = 0; i < count; i++) {
-        const el = document.createElement("div");
-        el.className = "emoji-rain";
-        el.textContent = emoji;
+            const duration = 1.1 + Math.random() * 1.0;
+            el.style.animationDuration = duration + "s";
+            el.style.animationDelay = (Math.random() * 0.3) + "s";
 
-        // random horizontal position
-        const left = Math.random() * 100;
-        el.style.left = left + "vw";
+            document.body.appendChild(el);
 
-        // random size
-        const size = 22 + Math.random() * 20;
-        el.style.fontSize = size + "px";
-
-        // random rotation direction
-        const rot = (Math.random() > 0.5 ? 1 : -1) * (40 + Math.random() * 80);
-        el.style.setProperty("--rot", rot + "deg");
-
-        // random duration (fast: 1.1s – 2.0s)
-        const duration = 1.1 + Math.random() * 0.9;
-        el.style.animationDuration = duration + "s";
-
-        // slight delay so they dont all start together
-        el.style.animationDelay = (Math.random() * 0.25) + "s";
-
-        document.body.appendChild(el);
-
-        // remove after animation ends
-        setTimeout(() => {
-            el.remove();
-        }, (duration + 0.3) * 1000);
+            setTimeout(() => el.remove(), (duration + 0.4) * 1000);
+        }
     }
-}
 
-
-emojiButtons.forEach(button => {
-
-    button.addEventListener(
-        "click",
-        () => {
-
+    emojiButtons.forEach(button => {
+        button.addEventListener("click", () => {
             const emoji = button.textContent.trim();
 
-            // text update
             emojiResult.style.opacity = "0";
-
             setTimeout(() => {
-                emojiResult.textContent =
-                    button.dataset.text;
+                emojiResult.textContent = button.dataset.text;
                 emojiResult.style.opacity = "1";
             }, 150);
 
-            // rain effect
             createEmojiRain(emoji);
-        }
-    );
-
-});
-
-
-/* =========================================================
-   SMOOTH LINKS
-========================================================= */
-
-document
-    .querySelectorAll('a[href^="#"]')
-    .forEach(link => {
-
-        link.addEventListener(
-            "click",
-            event => {
-
-                const id =
-                    link.getAttribute("href");
-
-                const target =
-                    document.querySelector(id);
-
-                if (!target) return;
-
-                event.preventDefault();
-
-                target.scrollIntoView({
-
-                    behavior: "smooth",
-
-                    block: "start"
-
-                });
-
-            }
-        );
-
+        });
     });
-
+})();
 
 /* =========================================================
-   MOUSE PARALLAX
+   PARTICLES
 ========================================================= */
+(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-const blobs =
-    document.querySelectorAll(".blob");
+    const count = Math.min(20, Math.max(10, Math.floor(window.innerWidth / 90)));
+    for (let i = 0; i < count; i++) {
+        const p = document.createElement("span");
+        p.className = "u-particle";
+        p.style.left = (4 + Math.random() * 92) + "vw";
+        p.style.top = (45 + Math.random() * 55) + "vh";
+        p.style.animationDuration = (7 + Math.random() * 9) + "s";
+        p.style.animationDelay = (-Math.random() * 9) + "s";
+        p.style.opacity = (0.2 + Math.random() * 0.4).toFixed(2);
+        document.body.appendChild(p);
+    }
+})();
 
+/* =========================================================
+   3D TILT ON CARDS
+========================================================= */
+(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!window.matchMedia("(pointer: fine)").matches) return;
 
-if (
-    window.matchMedia(
-        "(pointer: fine)"
-    ).matches
-) {
-
-    window.addEventListener(
-        "mousemove",
-        event => {
-
-            const x =
-                event.clientX /
-                window.innerWidth -
-                .5;
-
-            const y =
-                event.clientY /
-                window.innerHeight -
-                .5;
-
-
-            blobs.forEach(
-                (blob, index) => {
-
-                    const strength =
-                        (index + 1) * 10;
-
-                    blob.style.marginLeft =
-                        `${x * strength}px`;
-
-                    blob.style.marginTop =
-                        `${y * strength}px`;
-
-                }
-            );
-
-        }
+    const cards = document.querySelectorAll(
+        ".interest-card, .skill-card, .about-card, .about-text-card, .travel-main, .travel-small, .panel"
     );
 
-}
+    cards.forEach(card => {
+        let rafId = null;
 
-
-/* =========================================================
-   CARD TILT
-========================================================= */
-
-if (
-    window.matchMedia(
-        "(pointer: fine)"
-    ).matches
-) {
-
-    document
-        .querySelectorAll(".interest-card")
-        .forEach(card => {
-
-            card.addEventListener(
-                "mousemove",
-                event => {
-
-                    const rect =
-                        card.getBoundingClientRect();
-
-                    const x =
-                        event.clientX -
-                        rect.left;
-
-                    const y =
-                        event.clientY -
-                        rect.top;
-
-                    const rotateY =
-                        (
-                            (x -
-                            rect.width / 2)
-                            /
-                            (rect.width / 2)
-                        ) * 3;
-
-                    const rotateX =
-                        (
-                            (y -
-                            rect.height / 2)
-                            /
-                            (rect.height / 2)
-                        ) * -3;
-
-
-                    card.style.transform =
-                        `
-                        perspective(900px)
-                        rotateX(${rotateX}deg)
-                        rotateY(${rotateY}deg)
-                        translateY(-8px)
-                        `;
-                }
-            );
-
-
-            card.addEventListener(
-                "mouseleave",
-                () => {
-
-                    card.style.transform =
-                        "";
-
-                }
-            );
-
+        card.addEventListener("pointermove", e => {
+            if (rafId) return;
+            rafId = requestAnimationFrame(() => {
+                const r = card.getBoundingClientRect();
+                const x = (e.clientX - r.left) / r.width - 0.5;
+                const y = (e.clientY - r.top) / r.height - 0.5;
+                const tiltX = (-y * 3).toFixed(2);
+                const tiltY = (x * 3).toFixed(2);
+                card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-7px)`;
+                rafId = null;
+            });
         });
 
-}
+        card.addEventListener("pointerleave", () => {
+            if (rafId) cancelAnimationFrame(rafId);
+            rafId = null;
+            card.style.transform = "";
+        });
+    });
+})();
 
+/* =========================================================
+   MAGNETIC BUTTONS
+========================================================= */
+(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!window.matchMedia("(pointer: fine)").matches) return;
+
+    const buttons = document.querySelectorAll(
+        ".primary-btn, .secondary-btn, .telegram-btn, .top-button, .nav-button"
+    );
+
+    buttons.forEach(btn => {
+        let rafId = null;
+
+        btn.addEventListener("pointermove", e => {
+            if (rafId) return;
+            rafId = requestAnimationFrame(() => {
+                const r = btn.getBoundingClientRect();
+                const x = (e.clientX - r.left - r.width / 2) / r.width;
+                const y = (e.clientY - r.top - r.height / 2) / r.height;
+                btn.style.transform = `translate(${x * 5}px, ${y * 4}px) translateY(-3px)`;
+                rafId = null;
+            });
+        });
+
+        btn.addEventListener("pointerleave", () => {
+            if (rafId) cancelAnimationFrame(rafId);
+            rafId = null;
+            btn.style.transform = "";
+        });
+    });
+})();
+
+/* =========================================================
+   MOUSE PARALLAX FOR AURORA + EMOJIS
+========================================================= */
+(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!window.matchMedia("(pointer: fine)").matches) return;
+
+    const blobs = document.querySelectorAll(".aurora-blob");
+    const floats = document.querySelectorAll(".emoji-float");
+
+    let tx = 0, ty = 0;
+    let cx = 0, cy = 0;
+
+    window.addEventListener("pointermove", e => {
+        tx = (e.clientX / window.innerWidth - 0.5);
+        ty = (e.clientY / window.innerHeight - 0.5);
+    }, { passive: true });
+
+    function loop() {
+        cx += (tx - cx) * 0.06;
+        cy += (ty - cy) * 0.06;
+
+        blobs.forEach((b, i) => {
+            const s = (i + 1) * 14;
+            b.style.translate = `${cx * s}px ${cy * s}px`;
+        });
+
+        floats.forEach((f, i) => {
+            const s = (i + 1) * 6;
+            f.style.translate = `${cx * s}px ${cy * s}px`;
+        });
+
+        requestAnimationFrame(loop);
+    }
+    loop();
+})();
 
 /* =========================================================
    TAB TITLE
 ========================================================= */
-
-const normalTitle =
-    document.title;
-
-
-document.addEventListener(
-    "visibilitychange",
-    () => {
-
-        if (document.hidden) {
-
-            document.title =
-                "Mahbuba — qaytib keling 😊";
-
-        } else {
-
-            document.title =
-                normalTitle;
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   MOBILE OPTIMIZATION
-========================================================= */
-
-if (
-    "ontouchstart" in window
-) {
-
-    document.body.classList.add(
-        "touch-device"
-    );
-
-}
-
-
-
-/* =========================================================
-   MODERN INTERACTION UPGRADE
-========================================================= */
-
-/* Reading progress */
-const progress = document.createElement("div");
-progress.className = "reading-progress";
-document.body.appendChild(progress);
-
-function updateProgress(){
-    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-    const value = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
-    progress.style.width = value + "%";
-}
-window.addEventListener("scroll", updateProgress, {passive:true});
-updateProgress();
-
-/* Navbar state */
-const navbar = document.querySelector(".navbar");
-function updateNavbar(){
-    if (window.scrollY > 35) navbar.classList.add("scrolled");
-    else navbar.classList.remove("scrolled");
-}
-window.addEventListener("scroll", updateNavbar, {passive:true});
-updateNavbar();
-
-/* Desktop cursor glow */
-if (window.matchMedia("(pointer:fine)").matches) {
-    const glow = document.createElement("div");
-    glow.className = "cursor-glow";
-    document.body.appendChild(glow);
-
-    let gx = window.innerWidth / 2;
-    let gy = window.innerHeight / 2;
-    let tx = gx, ty = gy;
-
-    window.addEventListener("mousemove", (e) => {
-        tx = e.clientX;
-        ty = e.clientY;
-    }, {passive:true});
-
-    function animateGlow(){
-        gx += (tx - gx) * .10;
-        gy += (ty - gy) * .10;
-        glow.style.left = gx + "px";
-        glow.style.top = gy + "px";
-        requestAnimationFrame(animateGlow);
-    }
-    animateGlow();
-}
-
-/* Gentle button magnetic movement */
-if (window.matchMedia("(pointer:fine)").matches) {
-    document.querySelectorAll(".primary-btn,.secondary-btn,.telegram-btn,.top-button").forEach(btn => {
-        btn.addEventListener("mousemove", (e) => {
-            const r = btn.getBoundingClientRect();
-            const x = (e.clientX - r.left - r.width/2) / r.width;
-            const y = (e.clientY - r.top - r.height/2) / r.height;
-            btn.style.transform = `translate(${x*4}px,${y*3}px) translateY(-3px)`;
-        });
-        btn.addEventListener("mouseleave", () => {
-            btn.style.transform = "";
-        });
-    });
-}
-
-/* Staggered reveal: each grid item enters a fraction after the previous one. */
-document.querySelectorAll(".about-grid,.skills-grid,.interest-grid,.personal-panel,.timeline").forEach(group => {
-    [...group.children].forEach((item, i) => {
-        item.style.transitionDelay = `${i * 90}ms`;
-    });
-});
-
-/* Active navigation item based on visible section */
-const navItems = [...document.querySelectorAll(".nav-links a")];
-const navTargets = navItems
-    .map(a => document.querySelector(a.getAttribute("href")))
-    .filter(Boolean);
-
-const sectionObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        navItems.forEach(a => a.classList.remove("active"));
-        const active = navItems.find(a => a.getAttribute("href") === "#" + entry.target.id);
-        if (active) active.classList.add("active");
-    });
-}, {rootMargin:"-35% 0px -55% 0px", threshold:0});
-
-navTargets.forEach(section => sectionObserver.observe(section));
-
-/* Telegram CTA click micro-feedback */
-const tgButton = document.querySelector(".telegram-btn");
-if (tgButton) {
-    tgButton.addEventListener("click", () => {
-        tgButton.style.animation = "softPulse .7s ease";
-        setTimeout(() => tgButton.style.animation = "", 750);
-    });
-}
-
-</script>
-
-
-
-<script id="mahbuba-ultra-upgrade-js">
 (() => {
-  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // Small atmospheric particles — intentionally sparse and gentle.
-  if (!reduce) {
-    const count = Math.min(18, Math.max(8, Math.floor(window.innerWidth / 90)));
-    for (let i = 0; i < count; i++) {
-      const p = document.createElement('span');
-      p.className = 'u-particle';
-      p.style.left = (4 + Math.random() * 92) + 'vw';
-      p.style.top = (45 + Math.random() * 55) + 'vh';
-      p.style.animationDuration = (7 + Math.random() * 8) + 's';
-      p.style.animationDelay = (-Math.random() * 8) + 's';
-      p.style.opacity = (0.18 + Math.random() * 0.35).toFixed(2);
-      document.body.appendChild(p);
-    }
-  }
-
-  // Gentle 3D tilt on larger screens; no aggressive movement.
-  if (!reduce && window.innerWidth > 900) {
-    document.querySelectorAll('.interest-card,.skill-card,.about-card,.travel-main,.travel-small').forEach(card => {
-      card.addEventListener('pointermove', e => {
-        const r = card.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width - .5;
-        const y = (e.clientY - r.top) / r.height - .5;
-        card.style.transform = `perspective(1000px) rotateX(${(-y*2.2).toFixed(2)}deg) rotateY(${(x*2.2).toFixed(2)}deg) translateY(-7px)`;
-      });
-      card.addEventListener('pointerleave', () => {
-        card.style.transform = '';
-      });
+    const normalTitle = document.title;
+    document.addEventListener("visibilitychange", () => {
+        document.title = document.hidden
+            ? "Mahbuba — qaytib keling 😊"
+            : normalTitle;
     });
-  }
-
-  // Cursor halo for desktop.
-  if (!reduce && window.innerWidth > 1000) {
-    const halo = document.createElement('div');
-    halo.style.cssText = `
-      position:fixed;left:0;top:0;width:180px;height:180px;border-radius:50%;
-      pointer-events:none;z-index:9999;opacity:0;
-      transform:translate(-50%,-50%);
-      background:radial-gradient(circle,rgba(224,139,173,.10),transparent 68%);
-      transition:opacity .3s ease;
-    `;
-    document.body.appendChild(halo);
-    let tx=0,ty=0,cx=0,cy=0;
-    window.addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;halo.style.opacity='1';});
-    const loop=()=>{cx+=(tx-cx)*.10;cy+=(ty-cy)*.10;halo.style.left=cx+'px';halo.style.top=cy+'px';requestAnimationFrame(loop)};
-    loop();
-  }
 })();
+
+/* =========================================================
+   HERO PARALLAX ON SCROLL
+========================================================= */
+(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const hero = document.querySelector(".hero");
+    const heroInner = document.querySelector(".hero-inner");
+    const heroEmojis = document.querySelectorAll(".hero-emoji");
+
+    let ticking = false;
+
+    window.addEventListener("scroll", () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+            const y = window.scrollY;
+            if (y < window.innerHeight * 1.1) {
+                if (heroInner) {
+                    heroInner.style.transform = `translateY(${y * 0.18}px)`;
+                    heroInner.style.opacity = Math.max(0, 1 - y / (window.innerHeight * 0.9));
+                }
+                heroEmojis.forEach((e, i) => {
+                    const dir = i % 2 === 0 ? 1 : -1;
+                    e.style.transform = `translateY(${y * 0.12 * dir}px)`;
+                });
+            }
+            ticking = false;
+        });
+    }, { passive: true });
+})();
+
+/* =========================================================
+   TELEGRAM BUTTON PULSE
+========================================================= */
+(() => {
+    const tg = document.querySelector(".telegram-btn");
+    if (!tg) return;
+    tg.addEventListener("click", () => {
+        tg.animate(
+            [
+                { boxShadow: "0 14px 35px rgba(224,139,184,.22)" },
+                { boxShadow: "0 14px 35px rgba(224,139,184,.55)" },
+                { boxShadow: "0 14px 35px rgba(224,139,184,.22)" }
+            ],
+            { duration: 800, easing: "ease-in-out" }
+        );
+    });
+})();
+
+/* =========================================================
+   MARQUEE — pause on hover already handled in CSS
+========================================================= */
 </script>
 
 </body>
