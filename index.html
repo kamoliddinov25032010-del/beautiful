@@ -2302,272 +2302,396 @@ footer {
 
 
 /* =========================================================
-   MAHBUBA CINEMATIC GRAND INTRO
-   Stage 2: loading -> flower rain -> brand reveal -> site
-   ========================================================= */
-.grand-intro {
-    position: fixed;
-    inset: 0;
-    z-index: 100001;
-    display: grid;
-    place-items: center;
-    overflow: hidden;
-    visibility: hidden;
-    opacity: 0;
-    pointer-events: none;
+   MAHBUBA CINEMATIC BRAND INTRO — V2
+   Loading → cinematic flower rain → animated letters → website
+========================================================= */
+.grand-intro{
+    position:fixed;
+    inset:0;
+    z-index:100001;
+    display:grid;
+    place-items:center;
+    overflow:hidden;
+    visibility:hidden;
+    opacity:0;
+    pointer-events:none;
+    isolation:isolate;
     background:
-        radial-gradient(circle at 50% 42%, rgba(255,255,255,.98) 0%, rgba(255,239,245,.96) 24%, rgba(255,220,231,.98) 58%, #f8b9ca 100%);
+        radial-gradient(circle at 50% 48%, #fff 0%, #fff8fb 20%, #ffe8ef 52%, #f7b2c5 100%);
 }
-.grand-intro.active {
-    visibility: visible;
-    opacity: 1;
-    pointer-events: auto;
+.grand-intro::before{
+    content:"";
+    position:absolute;
+    inset:-20%;
+    background:
+        radial-gradient(circle at 20% 20%,rgba(255,255,255,.72),transparent 22%),
+        radial-gradient(circle at 82% 30%,rgba(255,255,255,.58),transparent 20%),
+        radial-gradient(circle at 50% 80%,rgba(190,32,69,.13),transparent 30%);
+    filter:blur(8px);
+    animation:introAtmosphere 8s ease-in-out infinite alternate;
 }
-.grand-intro.exit {
-    animation: mahbubaIntroExit 1.45s cubic-bezier(.76,0,.18,1) forwards;
+.grand-intro.active{
+    visibility:visible;
+    opacity:1;
+    pointer-events:auto;
+}
+.grand-intro.exit{
+    animation:introCurtainExit 1.65s cubic-bezier(.77,0,.16,1) forwards;
 }
 .grand-intro-bg,
 .grand-intro-glow,
 .flower-layer,
 .petal-layer,
-.star-layer {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
+.star-layer,
+.particle-layer{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
 }
-.grand-intro-bg {
+.grand-intro-bg{
     background:
-        radial-gradient(circle at 50% 50%, transparent 0 20%, rgba(255,255,255,.18) 48%, rgba(153,38,65,.12) 100%),
-        linear-gradient(120deg, rgba(255,255,255,.32), transparent 35%, rgba(255,255,255,.18) 70%, transparent);
-    animation: introBgMove 9s ease-in-out infinite alternate;
+        linear-gradient(115deg,rgba(255,255,255,.36),transparent 30%,rgba(255,255,255,.22) 68%,transparent),
+        radial-gradient(circle at 50% 50%,transparent 0 28%,rgba(164,28,57,.08) 72%,rgba(106,12,35,.15) 100%);
+    animation:introBgDrift 10s ease-in-out infinite alternate;
 }
 .grand-intro-glow::before,
-.grand-intro-glow::after {
-    content: "";
-    position: absolute;
-    width: min(65vw, 760px);
-    height: min(65vw, 760px);
-    border-radius: 50%;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
-    filter: blur(35px);
+.grand-intro-glow::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    top:50%;
+    border-radius:50%;
+    transform:translate(-50%,-50%);
 }
-.grand-intro-glow::before {
-    background: rgba(255,255,255,.55);
-    animation: introGlow 3.2s ease-in-out infinite;
+.grand-intro-glow::before{
+    width:min(72vw,900px);
+    height:min(72vw,900px);
+    background:rgba(255,255,255,.55);
+    filter:blur(70px);
+    animation:centralGlow 3.8s ease-in-out infinite;
 }
-.grand-intro-glow::after {
-    width: min(42vw, 520px);
-    height: min(42vw, 520px);
-    background: rgba(229,56,77,.12);
-    animation: introGlow 4.5s ease-in-out infinite reverse;
+.grand-intro-glow::after{
+    width:min(42vw,560px);
+    height:min(42vw,560px);
+    background:rgba(225,47,79,.13);
+    filter:blur(42px);
+    animation:centralGlow 5s ease-in-out infinite reverse;
 }
-.grand-intro-content {
-    position: relative;
-    z-index: 20;
-    width: min(94vw, 1200px);
-    text-align: center;
-    transform: translateY(26px) scale(.94);
-    opacity: 0;
+
+/* FLOWER RAIN */
+.intro-flower{
+    position:absolute;
+    top:-110px;
+    left:var(--x);
+    width:var(--size);
+    height:var(--size);
+    opacity:0;
+    transform:translate3d(0,-100px,0) rotate(0);
+    animation:flowerRain var(--duration) linear var(--delay) infinite;
+    filter:drop-shadow(0 8px 13px rgba(128,24,53,.16));
 }
-.grand-intro.active .grand-intro-content {
-    animation: grandContentIn 1.35s cubic-bezier(.16,1,.3,1) .55s forwards;
+.intro-flower .petal{
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:42%;
+    height:62%;
+    transform-origin:50% 100%;
+    border-radius:75% 75% 58% 58%;
+    background:linear-gradient(145deg,#fffdfd 0%,#ffdce7 42%,#ed6e91 100%);
+    box-shadow:inset 0 -5px 9px rgba(170,29,62,.12);
 }
-.grand-intro-small {
-    margin-bottom: 18px;
-    color: #9d3049;
-    font: 600 clamp(10px,1.2vw,14px)/1.2 "Inter",sans-serif;
-    letter-spacing: clamp(5px,1.1vw,12px);
-    text-transform: uppercase;
-    opacity: .82;
+.intro-flower .p1{transform:translate(-50%,-95%) rotate(0deg)}
+.intro-flower .p2{transform:translate(-50%,-95%) rotate(72deg)}
+.intro-flower .p3{transform:translate(-50%,-95%) rotate(144deg)}
+.intro-flower .p4{transform:translate(-50%,-95%) rotate(216deg)}
+.intro-flower .p5{transform:translate(-50%,-95%) rotate(288deg)}
+.flower-core{
+    position:absolute;
+    width:19%;
+    height:19%;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    border-radius:50%;
+    background:radial-gradient(circle at 35% 30%,#fff7a8 0 18%,#f7bd43 45%,#c56a24 100%);
+    box-shadow:0 0 15px rgba(245,185,62,.6);
 }
-.grand-intro-name {
-    position: relative;
-    display: inline-block;
-    font-family: "Playfair Display", Georgia, serif;
-    font-weight: 600;
-    font-size: clamp(64px, 13vw, 190px);
-    line-height: .9;
-    letter-spacing: clamp(-5px,-.35vw,-1px);
-    color: #8d1f37;
+.intro-petal{
+    position:absolute;
+    top:-50px;
+    left:var(--x);
+    width:var(--w);
+    height:var(--h);
+    border-radius:80% 20% 80% 20%;
+    background:linear-gradient(135deg,#fff,#f8abc2);
+    opacity:0;
+    box-shadow:0 5px 16px rgba(129,23,53,.12);
+    animation:petalRain var(--duration) linear var(--delay) infinite;
+}
+.intro-star{
+    position:absolute;
+    left:var(--x);
+    top:var(--y);
+    width:var(--size);
+    height:var(--size);
+    border-radius:50%;
+    background:#fff;
+    opacity:0;
+    box-shadow:0 0 12px 3px rgba(255,255,255,.8);
+    animation:starBlink 2.8s ease-in-out var(--delay) infinite;
+}
+.intro-particle{
+    position:absolute;
+    left:var(--x);
+    top:var(--y);
+    width:var(--size);
+    height:var(--size);
+    border-radius:50%;
+    background:#fff;
+    opacity:0;
+    box-shadow:0 0 14px 2px rgba(255,255,255,.8);
+    animation:particleFloat var(--duration) ease-in-out var(--delay) infinite;
+}
+
+/* BRAND CONTENT */
+.grand-intro-content{
+    position:relative;
+    z-index:30;
+    width:min(96vw,1400px);
+    text-align:center;
+    transform:translateY(38px);
+    opacity:0;
+}
+.grand-intro.active .grand-intro-content{
+    animation:contentEntrance 1.4s cubic-bezier(.16,1,.3,1) .35s forwards;
+}
+.grand-intro-small{
+    margin-bottom:20px;
+    font-family:"Inter",sans-serif;
+    font-size:clamp(10px,1.05vw,15px);
+    font-weight:600;
+    letter-spacing:.48em;
+    text-transform:uppercase;
+    color:#8d2945;
+    opacity:0;
+    animation:smallReveal 1s ease .9s forwards;
+}
+.grand-intro-name{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    perspective:1000px;
+    white-space:nowrap;
+    font-family:"Playfair Display",serif;
+    font-size:clamp(68px,13vw,190px);
+    line-height:.86;
+    font-weight:500;
+    letter-spacing:-.055em;
+    color:#9e1839;
     text-shadow:
-        0 8px 30px rgba(141,31,55,.16),
-        0 24px 80px rgba(229,56,77,.15);
-    filter: drop-shadow(0 12px 24px rgba(141,31,55,.10));
+        0 5px 0 rgba(133,18,48,.08),
+        0 20px 50px rgba(123,19,48,.2);
 }
-.grand-intro-name span {
-    display: inline-block;
-    background: linear-gradient(110deg,#7d1730 0%,#b82238 26%,#ff9eb6 48%,#b82238 67%,#73142c 100%);
-    background-size: 240% 100%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    animation: nameLuxuryShine 3.1s cubic-bezier(.45,0,.25,1) 1.45s both;
+.grand-intro-name span{
+    display:inline-flex;
+    transform-origin:50% 100%;
 }
-.grand-intro-name::before {
-    content: "";
-    position: absolute;
-    left: -8%;
-    right: -8%;
-    bottom: -20%;
-    height: 2px;
-    border-radius: 99px;
-    background: linear-gradient(90deg,transparent,rgba(184,34,56,.25),#b82238,rgba(184,34,56,.25),transparent);
-    transform: scaleX(0);
-    transform-origin: center;
-    animation: nameUnderline 1.3s cubic-bezier(.16,1,.3,1) 2.2s forwards;
+.grand-intro-name .letter{
+    display:inline-block;
+    opacity:0;
+    transform:
+        translate3d(0,95px,0)
+        rotateX(-82deg)
+        rotateY(var(--ry))
+        rotateZ(var(--rz))
+        scale(.55);
+    filter:blur(13px);
+    background:linear-gradient(
+        110deg,
+        #7e1532 0%,
+        #d52e58 24%,
+        #fff 43%,
+        #e64c70 56%,
+        #86132f 82%,
+        #d82e57 100%
+    );
+    background-size:260% 100%;
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    animation:
+        letterEntrance 1.45s cubic-bezier(.16,1,.3,1) var(--delay) forwards,
+        letterShimmer 3.8s ease-in-out calc(var(--delay) + 1.45s) infinite;
 }
-.grand-intro-line {
-    width: min(360px, 55vw);
-    height: 1px;
-    margin: 34px auto 24px;
-    background: linear-gradient(90deg,transparent,rgba(141,31,55,.45),transparent);
-    transform: scaleX(0);
-    animation: lineGrow 1.2s cubic-bezier(.16,1,.3,1) 2.25s forwards;
+.grand-intro-name .letter:nth-child(1){--delay:.18s;--ry:-38deg;--rz:-7deg}
+.grand-intro-name .letter:nth-child(2){--delay:.25s;--ry:28deg;--rz:6deg}
+.grand-intro-name .letter:nth-child(3){--delay:.32s;--ry:-25deg;--rz:-4deg}
+.grand-intro-name .letter:nth-child(4){--delay:.39s;--ry:34deg;--rz:5deg}
+.grand-intro-name .letter:nth-child(5){--delay:.46s;--ry:-31deg;--rz:-6deg}
+.grand-intro-name .letter:nth-child(6){--delay:.53s;--ry:26deg;--rz:5deg}
+.grand-intro-name .letter:nth-child(7){--delay:.60s;--ry:-22deg;--rz:-4deg}
+
+/* each character continues moving after settling */
+.grand-intro.active .letter{
+    animation:
+        letterEntrance 1.45s cubic-bezier(.16,1,.3,1) var(--delay) forwards,
+        letterFloat 4.8s ease-in-out calc(var(--delay) + 1.65s) infinite,
+        letterShimmer 3.8s ease-in-out calc(var(--delay) + 1.45s) infinite;
 }
-.grand-intro-sub {
-    color: #8d3a4e;
-    font: 400 clamp(11px,1.35vw,16px)/1.7 "Inter",sans-serif;
-    letter-spacing: clamp(2px,.45vw,5px);
-    opacity: 0;
-    transform: translateY(12px);
-    animation: subReveal 1s ease 2.55s forwards;
+.grand-intro-line{
+    width:min(360px,48vw);
+    height:1px;
+    margin:34px auto 22px;
+    position:relative;
+    overflow:hidden;
+    background:rgba(142,31,60,.16);
 }
-.intro-sweep {
-    position: absolute;
-    z-index: 25;
-    top: -15%;
-    left: -35%;
-    width: 20%;
-    height: 130%;
-    background: linear-gradient(90deg,transparent,rgba(255,255,255,.65),transparent);
-    filter: blur(10px);
-    transform: rotate(12deg) translateX(-160%);
+.grand-intro-line::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    transform:translateX(-110%);
+    background:linear-gradient(90deg,transparent,#b82048,#fff,#b82048,transparent);
+    animation:lineReveal 1.4s cubic-bezier(.77,0,.18,1) 1.75s forwards;
 }
-.grand-intro.active .intro-sweep {
-    animation: lightSweep 1.9s cubic-bezier(.65,0,.35,1) 1.7s forwards;
+.grand-intro-sub{
+    font-family:"Inter",sans-serif;
+    font-size:clamp(11px,1.25vw,16px);
+    letter-spacing:.25em;
+    text-transform:uppercase;
+    color:#76253d;
+    opacity:0;
+    transform:translateY(15px);
+    animation:subReveal 1.2s ease 1.9s forwards;
 }
-.flower-layer,
-.petal-layer,
-.star-layer { z-index: 10; }
-.intro-flower {
-    position: absolute;
-    top: -12vh;
-    left: var(--x);
-    width: var(--size);
-    height: var(--size);
-    opacity: 0;
-    transform: translate3d(0,-12vh,0) rotate(0deg) scale(.75);
-    animation: flowerRain var(--duration) cubic-bezier(.18,.72,.24,1) var(--delay) forwards;
-    will-change: transform, opacity;
+.intro-sweep{
+    position:absolute;
+    z-index:40;
+    top:-20%;
+    left:-35%;
+    width:24%;
+    height:140%;
+    opacity:0;
+    transform:rotate(20deg);
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.08) 20%,
+        rgba(255,255,255,.9) 50%,
+        rgba(255,255,255,.08) 80%,
+        transparent
+    );
+    filter:blur(5px);
+    pointer-events:none;
 }
-.intro-flower .flower-core {
-    position: absolute;
-    inset: 28%;
-    border-radius: 50%;
-    background: radial-gradient(circle at 35% 30%,#fff4c9 0 18%,#e8b55b 20% 55%,#9b642b 58% 100%);
-    box-shadow: 0 0 12px rgba(120,52,55,.12);
-    z-index: 3;
+.grand-intro.active .intro-sweep{
+    animation:brandLightSweep 1.5s ease 2.45s forwards;
 }
-.intro-flower .petal {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 43%;
-    height: 68%;
-    transform-origin: 50% 92%;
-    border-radius: 65% 65% 52% 52%;
-    background: linear-gradient(145deg,#fff7fa 0%,#ffc9d8 45%,#df617e 100%);
-    box-shadow: inset 0 -3px 7px rgba(141,31,55,.10);
+
+/* CINEMATIC EXIT */
+.grand-intro.exit .grand-intro-bg{
+    animation:exitBg 1.6s ease forwards;
 }
-.intro-flower .p1 { transform: translate(-50%,-92%) rotate(0deg); }
-.intro-flower .p2 { transform: translate(-50%,-92%) rotate(72deg); }
-.intro-flower .p3 { transform: translate(-50%,-92%) rotate(144deg); }
-.intro-flower .p4 { transform: translate(-50%,-92%) rotate(216deg); }
-.intro-flower .p5 { transform: translate(-50%,-92%) rotate(288deg); }
-.intro-petal {
-    position: absolute;
-    top: -10vh;
-    left: var(--x);
-    width: var(--w);
-    height: var(--h);
-    border-radius: 80% 15% 80% 15%;
-    background: linear-gradient(145deg,rgba(255,255,255,.95),rgba(255,170,194,.9));
-    box-shadow: 0 5px 18px rgba(141,31,55,.10);
-    opacity: 0;
-    transform: translateY(-10vh) rotate(0deg);
-    animation: petalRain var(--duration) linear var(--delay) forwards;
+.grand-intro.exit .grand-intro-content{
+    animation:contentExit 1.1s cubic-bezier(.76,0,.18,1) forwards;
 }
-.intro-star {
-    position: absolute;
-    left: var(--x);
-    top: var(--y);
-    width: var(--size);
-    height: var(--size);
-    border-radius: 50%;
-    background: #fff;
-    box-shadow: 0 0 10px #fff, 0 0 25px rgba(255,255,255,.9);
-    opacity: 0;
-    animation: starTwinkle 2.8s ease-in-out var(--delay) infinite;
+.grand-intro.exit .flower-layer,
+.grand-intro.exit .petal-layer,
+.grand-intro.exit .star-layer,
+.grand-intro.exit .particle-layer{
+    animation:fallAway 1.25s ease forwards;
 }
-@keyframes grandContentIn {
-    0% { opacity:0; transform:translateY(34px) scale(.90); filter:blur(10px); }
-    55% { opacity:1; transform:translateY(-4px) scale(1.02); filter:blur(0); }
-    100% { opacity:1; transform:translateY(0) scale(1); filter:blur(0); }
+@keyframes introAtmosphere{from{transform:scale(1) rotate(0deg)}to{transform:scale(1.08) rotate(2deg)}}
+@keyframes introBgDrift{from{transform:scale(1) translate3d(-1%,0,0)}to{transform:scale(1.08) translate3d(1%,1%,0)}}
+@keyframes centralGlow{0%,100%{transform:translate(-50%,-50%) scale(.88);opacity:.55}50%{transform:translate(-50%,-50%) scale(1.08);opacity:.9}}
+@keyframes flowerRain{
+    0%{opacity:0;transform:translate3d(0,-100px,0) rotate(0deg)}
+    8%{opacity:.92}
+    50%{opacity:1}
+    100%{opacity:0;transform:translate3d(var(--drift),calc(100vh + 180px),0) rotate(var(--rot))}
 }
-@keyframes nameLuxuryShine {
-    0% { background-position: 0% 50%; transform: scale(.92); filter: blur(4px); }
-    28% { background-position: 38% 50%; transform: scale(1.03); filter: blur(0); }
-    60% { background-position: 75% 50%; transform: scale(1); }
-    100% { background-position: 100% 50%; transform: scale(1); }
+@keyframes petalRain{
+    0%{opacity:0;transform:translate3d(0,-80px,0) rotate(0deg)}
+    10%{opacity:.7}
+    100%{opacity:0;transform:translate3d(var(--drift),calc(100vh + 100px),0) rotate(var(--rot))}
 }
-@keyframes nameUnderline { to { transform:scaleX(1); } }
-@keyframes lineGrow { to { transform:scaleX(1); } }
-@keyframes subReveal { to { opacity:.82; transform:translateY(0); } }
-@keyframes lightSweep {
-    0% { transform:rotate(12deg) translateX(-160%); opacity:0; }
-    15% { opacity:1; }
-    70% { opacity:.8; }
-    100% { transform:rotate(12deg) translateX(760%); opacity:0; }
+@keyframes starBlink{0%,100%{opacity:0;transform:scale(.4)}45%{opacity:.9;transform:scale(1)}70%{opacity:.2;transform:scale(.7)}}
+@keyframes particleFloat{
+    0%{opacity:0;transform:translateY(30px) scale(.3)}
+    30%{opacity:.8}
+    70%{opacity:.55}
+    100%{opacity:0;transform:translateY(-80px) scale(1.1)}
 }
-@keyframes flowerRain {
-    0% { opacity:0; transform:translate3d(0,-16vh,0) rotate(-30deg) scale(.72); }
-    10% { opacity:1; }
-    65% { opacity:.96; }
-    100% { opacity:0; transform:translate3d(var(--drift),118vh,0) rotate(var(--rot)) scale(1); }
+@keyframes contentEntrance{
+    from{opacity:0;transform:translateY(38px) scale(.9)}
+    to{opacity:1;transform:translateY(0) scale(1)}
 }
-@keyframes petalRain {
-    0% { opacity:0; transform:translate3d(0,-12vh,0) rotate(0deg); }
-    8% { opacity:.75; }
-    82% { opacity:.55; }
-    100% { opacity:0; transform:translate3d(var(--drift),118vh,0) rotate(var(--rot)); }
+@keyframes smallReveal{
+    from{opacity:0;transform:translateY(15px);letter-spacing:.8em}
+    to{opacity:1;transform:translateY(0);letter-spacing:.48em}
 }
-@keyframes starTwinkle {
-    0%,100% { opacity:0; transform:scale(.35); }
-    45% { opacity:.9; transform:scale(1); }
-    70% { opacity:.15; transform:scale(.55); }
+@keyframes letterEntrance{
+    0%{opacity:0;transform:translate3d(0,95px,0) rotateX(-82deg) rotateY(var(--ry)) rotateZ(var(--rz)) scale(.55);filter:blur(13px)}
+    58%{opacity:1;transform:translate3d(0,-12px,0) rotateX(12deg) rotateY(calc(var(--ry) * -.22)) rotateZ(calc(var(--rz) * -.35)) scale(1.06);filter:blur(0)}
+    78%{transform:translate3d(0,4px,0) rotateX(-4deg) rotateY(3deg) rotateZ(0deg) scale(.985)}
+    100%{opacity:1;transform:translate3d(0,0,0) rotateX(0) rotateY(0) rotateZ(0) scale(1);filter:blur(0)}
 }
-@keyframes introBgMove {
-    0% { transform:scale(1) rotate(0deg); }
-    100% { transform:scale(1.08) rotate(2deg); }
+@keyframes letterFloat{
+    0%,100%{transform:translateY(0) rotateZ(0) rotateY(0) scale(1)}
+    25%{transform:translateY(-7px) rotateZ(-1.3deg) rotateY(2deg) scale(1.012)}
+    50%{transform:translateY(3px) rotateZ(1deg) rotateY(-2deg) scale(.995)}
+    75%{transform:translateY(-4px) rotateZ(-.7deg) rotateY(1deg) scale(1.006)}
 }
-@keyframes introGlow {
-    0%,100% { transform:translate(-50%,-50%) scale(.88); opacity:.55; }
-    50% { transform:translate(-50%,-50%) scale(1.08); opacity:.9; }
+@keyframes letterShimmer{
+    0%,20%{background-position:100% 50%}
+    58%,78%{background-position:0% 50%}
+    100%{background-position:100% 50%}
 }
-@keyframes mahbubaIntroExit {
-    0% { opacity:1; transform:scale(1); filter:blur(0); }
-    45% { opacity:1; transform:scale(1.018); }
-    100% { opacity:0; transform:scale(1.06); filter:blur(14px); visibility:hidden; }
+@keyframes lineReveal{to{transform:translateX(110%)}}
+@keyframes subReveal{to{opacity:1;transform:translateY(0)}}
+@keyframes brandLightSweep{
+    0%{left:-35%;opacity:0}
+    12%{opacity:.9}
+    100%{left:115%;opacity:0}
 }
-@media (max-width: 700px) {
-    .grand-intro-name { font-size: clamp(54px, 18vw, 105px); }
-    .grand-intro-small { letter-spacing: 5px; margin-bottom: 15px; }
-    .grand-intro-line { margin: 25px auto 18px; }
-    .grand-intro-sub { width: 82vw; margin:auto; letter-spacing: 2px; }
-    .intro-flower { animation-duration: calc(var(--duration) * .88); }
-    .intro-petal { animation-duration: calc(var(--duration) * .9); }
+@keyframes contentExit{
+    0%{opacity:1;transform:translateY(0) scale(1)}
+    100%{opacity:0;transform:translateY(-55px) scale(1.08);filter:blur(9px)}
+}
+@keyframes exitBg{to{transform:scale(1.22);filter:blur(12px);opacity:0}}
+@keyframes fallAway{to{opacity:0;transform:scale(1.2)}}
+@keyframes introCurtainExit{
+    0%{opacity:1;visibility:visible;clip-path:inset(0 0 0 0)}
+    72%{opacity:1;clip-path:inset(0 0 0 0)}
+    100%{opacity:0;visibility:hidden;clip-path:inset(0 0 100% 0)}
+}
+
+@media(max-width:700px){
+    .grand-intro-name{
+        font-size:clamp(55px,18vw,105px);
+        letter-spacing:-.06em;
+    }
+    .grand-intro-small{
+        font-size:9px;
+        letter-spacing:.34em;
+        margin-bottom:16px;
+    }
+    .grand-intro-sub{
+        width:86vw;
+        margin:auto;
+        font-size:9px;
+        line-height:1.8;
+        letter-spacing:.16em;
+    }
+    .grand-intro-line{
+        width:55vw;
+        margin:25px auto 17px;
+    }
+    .intro-flower{filter:drop-shadow(0 5px 9px rgba(128,24,53,.13))}
+    .grand-intro-name .letter{
+        animation-duration:1.15s;
+    }
 }
 @media (prefers-reduced-motion: reduce) {
     .grand-intro *,
@@ -2596,12 +2720,13 @@ footer {
     <div class="star-layer" id="starLayer"></div>
     <div class="flower-layer" id="flowerLayer"></div>
     <div class="petal-layer" id="petalLayer"></div>
+    <div class="particle-layer" id="particleLayer"></div>
     <div class="intro-sweep"></div>
 
     <div class="grand-intro-content">
         <div class="grand-intro-small">Welcome to</div>
-        <div class="grand-intro-name">
-            <span>Mahbuba</span>
+        <div class="grand-intro-name" aria-label="Mahbuba">
+            <span class="letter">M</span><span class="letter">a</span><span class="letter">h</span><span class="letter">b</span><span class="letter">u</span><span class="letter">b</span><span class="letter">a</span>
         </div>
         <div class="grand-intro-line"></div>
         <div class="grand-intro-sub">A story of elegance, knowledge &amp; dreams</div>
@@ -3580,4 +3705,137 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 </script>
 
 </body>
-</html>
+</html<script>
+/* =========================================================
+   MAHBUBA CINEMATIC INTRO V2
+   1) real loading
+   2) brand animation
+   3) flower / petal rain
+   4) animated individual letters
+   5) cinematic reveal of the complete website
+========================================================= */
+window.addEventListener("load", () => {
+    const preloader = document.getElementById("preloader");
+    const intro = document.getElementById("grandIntro");
+    const flowerLayer = document.getElementById("flowerLayer");
+    const petalLayer = document.getElementById("petalLayer");
+    const starLayer = document.getElementById("starLayer");
+    const particleLayer = document.getElementById("particleLayer");
+
+    if (!preloader || !intro) return;
+
+    document.body.style.overflow = "hidden";
+
+    const mobile = window.matchMedia("(max-width: 700px)").matches;
+
+    const random = (min, max) => Math.random() * (max - min) + min;
+
+    function flower() {
+        const el = document.createElement("div");
+        el.className = "intro-flower";
+
+        el.style.setProperty("--size", `${random(mobile ? 20 : 24, mobile ? 44 : 66)}px`);
+        el.style.setProperty("--x", `${random(-8, 104)}%`);
+        el.style.setProperty("--drift", `${random(-190, 190)}px`);
+        el.style.setProperty("--duration", `${random(mobile ? 4.5 : 5.2, mobile ? 7 : 9)}s`);
+        el.style.setProperty("--delay", `${random(0, 4)}s`);
+        el.style.setProperty("--rot", `${random(-720, 720)}deg`);
+
+        el.innerHTML = `
+            <span class="petal p1"></span>
+            <span class="petal p2"></span>
+            <span class="petal p3"></span>
+            <span class="petal p4"></span>
+            <span class="petal p5"></span>
+            <span class="flower-core"></span>
+        `;
+
+        flowerLayer.appendChild(el);
+    }
+
+    function petal() {
+        const el = document.createElement("div");
+        el.className = "intro-petal";
+
+        el.style.setProperty("--x", `${random(-5, 105)}%`);
+        el.style.setProperty("--w", `${random(6, mobile ? 14 : 20)}px`);
+        el.style.setProperty("--h", `${random(12, mobile ? 25 : 35)}px`);
+        el.style.setProperty("--drift", `${random(-260, 260)}px`);
+        el.style.setProperty("--rot", `${random(-1000, 1000)}deg`);
+        el.style.setProperty("--duration", `${random(5, 9)}s`);
+        el.style.setProperty("--delay", `${random(0, 4)}s`);
+
+        petalLayer.appendChild(el);
+    }
+
+    function star() {
+        const el = document.createElement("span");
+        el.className = "intro-star";
+
+        el.style.setProperty("--x", `${random(5, 95)}%`);
+        el.style.setProperty("--y", `${random(5, 95)}%`);
+        el.style.setProperty("--size", `${random(2, mobile ? 4 : 5)}px`);
+        el.style.setProperty("--delay", `${random(0, 3)}s`);
+
+        starLayer.appendChild(el);
+    }
+
+    function particle() {
+        const el = document.createElement("span");
+        el.className = "intro-particle";
+
+        el.style.setProperty("--x", `${random(5, 95)}%`);
+        el.style.setProperty("--y", `${random(20, 90)}%`);
+        el.style.setProperty("--size", `${random(2, 5)}px`);
+        el.style.setProperty("--delay", `${random(0, 3)}s`);
+        el.style.setProperty("--duration", `${random(2.5, 5)}s`);
+
+        particleLayer.appendChild(el);
+    }
+
+    const flowers = mobile ? 34 : 68;
+    const petals = mobile ? 48 : 96;
+    const stars = mobile ? 14 : 28;
+    const particles = mobile ? 18 : 38;
+
+    for (let i = 0; i < flowers; i++) flower();
+    for (let i = 0; i < petals; i++) petal();
+    for (let i = 0; i < stars; i++) star();
+    for (let i = 0; i < particles; i++) particle();
+
+    /*
+      IMPORTANT:
+      The main website is NOT shown between loading and the brand intro.
+      It is already loaded in the background, but the cinematic layer
+      stays above it until the complete intro has finished.
+    */
+
+    // 1. Real loading screen
+    setTimeout(() => {
+        preloader.classList.add("done");
+
+        // 2. Immediately after loading, start the Mahbuba cinematic
+        setTimeout(() => {
+            intro.classList.add("active");
+            intro.setAttribute("aria-hidden", "false");
+        }, 420);
+
+        // 3. Let every letter + flower + light animation finish
+        const introDuration = mobile ? 7600 : 8500;
+
+        setTimeout(() => {
+            intro.classList.add("exit");
+
+            // 4. Only now reveal the actual website
+            setTimeout(() => {
+                intro.setAttribute("aria-hidden", "true");
+                intro.style.pointerEvents = "none";
+                document.body.style.overflow = "";
+            }, 1650);
+
+        }, introDuration);
+
+    }, 1700);
+});
+
+>
